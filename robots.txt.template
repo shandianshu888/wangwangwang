@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tiziwww.com/sitemap.xml
+Sitemap: https://tiziwww.com/rss.xml

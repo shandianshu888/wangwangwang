@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>旺仔对比｜16 个热门机场横向深度对比与选购指南</title>
+  <meta name="description" content="按旺仔推荐原始顺序，区分首推、次推及全系列候选，从【线路架构、使用体验、晚高峰表现、节假日灾备、购买前必查】5 大维度横向拆解 16 个机场候选，讲人话帮你科学选购与排雷。">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/goodies.css">
+  <style>
+    /* Scoped styles for compare page */
+    .compare-filter-section {
+      background: #fff;
+      border-bottom: var(--border);
+      padding-block: 20px;
+      position: sticky;
+      top: 72px;
+      z-index: 30;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .compare-filter-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .compare-filter-title {
+      font-size: 0.95rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .compare-filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .compare-tab-btn {
+      border: 2px solid var(--ink);
+      background: #fff;
+      color: var(--ink);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 0.86rem;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, box-shadow 0.15s ease;
+      transform-origin: center center;
+    }
+    .compare-tab-btn:hover, .compare-tab-btn:focus-visible {
+      transform: scale(1.15) translateY(-2px);
+      box-shadow: 4px 4px 0 var(--ink);
+      background: var(--pink);
+      color: var(--ink);
+    }
+    .compare-tab-btn:active {
+      transform: scale(1.05) translateY(1px);
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+    }
+    .compare-tab-btn.active {
+      background: var(--pink);
+      color: var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .compare-tab-btn[data-tab="all"].active { background: var(--yellow); }
+    .compare-tab-btn[data-tab="line"].active { background: #dcecff; }
+    .compare-tab-btn[data-tab="exp"].active { background: #ffd8e2; }
+    .compare-tab-btn[data-tab="peak"].active { background: #fff0a8; }
+    .compare-tab-btn[data-tab="holiday"].active { background: #ffe2c7; }
+    .compare-tab-btn[data-tab="check"].active { background: #d8ead2; }
+
+    .airport-sidebar-nav a {
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, box-shadow 0.15s ease;
+      transform-origin: center left;
+    }
+    .airport-sidebar-nav a:hover, .airport-sidebar-nav a:focus-visible {
+      transform: scale(1.06) translateX(4px);
+      background: #fff0a8;
+    }
+    .airport-sidebar-nav a:active {
+      transform: scale(1.02) translateX(2px);
+    }
+
+
+    .compare-main-container {
+      padding-block: 36px 60px;
+    }
+
+    .compare-right-sidebar-layout {
+      width: min(1440px, calc(100% - 40px));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      gap: 28px;
+      align-items: start;
+    }
+    .airport-sidebar {
+      position: sticky;
+      top: 150px;
+      max-height: calc(100vh - 170px);
+    }
+    @media (max-width: 1050px) {
+      .compare-right-sidebar-layout {
+        grid-template-columns: 1fr;
+      }
+      .airport-sidebar {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        order: -1;
+      }
+    }
+
+    .compare-summary-box {
+      scroll-margin-top: 150px;
+      margin-bottom: 40px;
+      margin-bottom: 40px;
+      background: #fff8e8;
+      border: var(--border);
+      border-radius: 18px;
+      padding: 28px 32px;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .compare-summary-box h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-table-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+      border: var(--border);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+      font-size: 0.88rem;
+    }
+    .compare-table th {
+      background: var(--ink);
+      color: #fff;
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 900;
+      white-space: nowrap;
+      font-size: 0.88rem;
+    }
+    .compare-table th.clickable-th {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .compare-table th.clickable-th:hover {
+      background: var(--pink);
+      color: var(--ink);
+    }
+    .compare-table td {
+      padding: 14px 16px;
+      border-bottom: 1.5px solid #e8e4dc;
+      vertical-align: middle;
+      line-height: 1.55;
+    }
+    .compare-table th:nth-child(1), .compare-table td:nth-child(1) { min-width: 260px; }
+    .compare-table th:nth-child(2), .compare-table td:nth-child(2) { min-width: 165px; }
+    .compare-table th:nth-child(3), .compare-table td:nth-child(3) { min-width: 165px; }
+    .compare-table th:nth-child(4), .compare-table td:nth-child(4) { min-width: 175px; }
+    .compare-table th:nth-child(5), .compare-table td:nth-child(5) { min-width: 175px; }
+    .compare-table th:nth-child(6), .compare-table td:nth-child(6) { min-width: 175px; }
+
+    .table-airport-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .table-jump-link {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 950;
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+    .table-jump-link:hover {
+      text-decoration: underline;
+      color: #c52b53;
+    }
+    .table-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px 9px;
+      background: var(--yellow);
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 950;
+      text-decoration: none;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      white-space: nowrap;
+      transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
+    }
+    .table-link-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      background: var(--pink);
+      color: var(--ink);
+    }
+
+    .compare-table tr:nth-child(even) td {
+      background: #faf7f0;
+    }
+    .compare-table tr:hover td {
+      background: #fff6da;
+    }
+
+    .compare-table tr.row-top1 td {
+      background: #fff0f4;
+    }
+    .compare-table tr.row-top2 td {
+      background: #fffce6;
+    }
+    .compare-table tr.row-top3 td {
+      background: #f0f7ff;
+    }
+
+    .rank-tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 950;
+      margin-right: 6px;
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+    .rank-tag.tag-top1 { background: var(--pink); color: var(--ink); }
+    .rank-tag.tag-top2 { background: var(--yellow); color: var(--ink); }
+    .rank-tag.tag-top3 { background: #60a5fa; color: #fff; }
+    .rank-tag.tag-sub  { background: #e2e8f0; color: #475569; }
+
+    .compare-grid-layout {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+      scroll-margin-top: 150px;
+    }
+    @media (max-width: 960px) {
+      .compare-grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compare-card {
+      border: var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      background: #fff;
+      box-shadow: 6px 6px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      scroll-margin-top: 150px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .compare-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+    .compare-card.card-top1 {
+      background: #fff8fc;
+      border-width: 3px;
+      box-shadow: 7px 7px 0 var(--pink);
+    }
+    .compare-card.card-top2 {
+      background: #fffdf2;
+      border-width: 3px;
+      box-shadow: 7px 7px 0 var(--yellow);
+    }
+    .compare-card.card-top3 {
+      background: #f8fbff;
+      border-width: 3px;
+      box-shadow: 7px 7px 0 #3b82f6;
+    }
+
+    .compare-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed var(--ink);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .compare-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-card-title h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 950;
+    }
+    .compare-rank-badge {
+      font-size: 0.95rem;
+      font-weight: 950;
+      padding: 4px 12px;
+      background: var(--yellow);
+      border: var(--border);
+      border-radius: 999px;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .compare-rank-badge.badge-top1 {
+      background: var(--pink);
+      color: var(--ink);
+    }
+    .compare-rank-badge.badge-top2 {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+    .compare-rank-badge.badge-top3 {
+      background: #60a5fa;
+      color: #fff;
+    }
+
+    .dim-group {
+      margin-bottom: 14px;
+      padding: 13px 15px;
+      border-radius: 12px;
+      border: 1.5px solid var(--ink);
+      background: #faf6ee;
+    }
+    .dim-group.dim-line { background: #f0f7ff; border-color: #7ba4db; }
+    .dim-group.dim-exp { background: #fff0f5; border-color: #e59bb1; }
+    .dim-group.dim-peak { background: #fffde6; border-color: #d4b43b; }
+    .dim-group.dim-holiday { background: #fff4ea; border-color: #e09857; }
+    .dim-group.dim-check { background: #f2f9f4; border-color: #65ab7c; }
+
+    .dim-title {
+      font-weight: 950;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 5px;
+      color: var(--ink);
+    }
+    .dim-desc {
+      margin: 0;
+      font-size: 0.87rem;
+      color: #3b3734;
+      line-height: 1.55;
+    }
+
+    .compare-card-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .compare-card-footer .button {
+      padding: 8px 16px;
+      font-size: 0.88rem;
+    }
+
+    .compare-guide-section {
+      background: var(--pink-soft);
+      border: var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .compare-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+    @media (max-width: 760px) {
+      .compare-guide-grid { grid-template-columns: 1fr; }
+    }
+    .compare-guide-item {
+      background: #fff;
+      border: var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .compare-guide-item h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--ink);
+    }
+    .compare-guide-item p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      color: #514b47;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span>
+      <span>新年旺旺旺</span>
+    </a>
+    <button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button>
+    <nav id="site-nav" class="site-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a class="nav-branded" href="goodies.html">旺仔推荐</a>
+      <a class="nav-branded" href="toolbox.html">百宝狗窝</a>
+      <a class="nav-branded" href="help.html">急救锦囊</a>
+      <a class="nav-branded" href="pitfall.html">排雷哨所</a>
+      <a class="nav-branded" href="fun.html">快乐源泉</a>
+      <a href="articles.html">文章</a>
+      <a href="about.html">关于旺仔</a>
+      <a href="policy.html">编辑政策</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">旺仔推荐 · 横向多维度深度对比</p>
+        <h1>16 个候选，明确区分【首推·次推】，一键定位适合你的机场。</h1>
+        <p>保留旺仔推荐原始顺序（01 闪电鼠 ~ 16 Flybit），明确区分<b>【首推】</b>、<b>【次推】</b>、<b>【三推】</b>与全系列候选。统一从<b>【线路架构】</b>、<b>【使用体验】</b>、<b>【晚高峰表现】</b>、<b>【节假日灾备】</b>与<b>【购买前必查】</b> 5 大关键维度横向拆解！</p>
+      </div>
+    </section>
+
+    <!-- 维度筛选器 -->
+    <div class="compare-filter-section">
+      <div class="wrap compare-filter-inner">
+        <div class="compare-filter-title">
+          <span>🐕 旺仔维度筛选：</span>
+        </div>
+        <div class="compare-filter-buttons" role="tablist">
+          <button class="compare-tab-btn active" data-tab="all" role="tab">全维度查看</button>
+          <button class="compare-tab-btn" data-tab="line" role="tab">🌐 线路架构</button>
+          <button class="compare-tab-btn" data-tab="exp" role="tab">📱 使用体验</button>
+          <button class="compare-tab-btn" data-tab="peak" role="tab">⚡ 晚高峰表现</button>
+          <button class="compare-tab-btn" data-tab="holiday" role="tab">🛡️ 节假日灾备</button>
+          <button class="compare-tab-btn" data-tab="check" role="tab">💡 购买前必查</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-main-container">
+      <div class="compare-right-sidebar-layout">
+        
+        <!-- 左侧/中间主体内容 (Main Content) -->
+        <div class="goodies-grid-wrap">
+
+
+          <!-- 横向对比速查表 -->
+          <section class="compare-summary-box">
+            <h2>📊 16 个机场横向对比速查表（含首推·次推区分）</h2>
+            <p>点击序号可快速滑动查看右侧或卡片详情：</p>
+            <div class="compare-table-wrapper">
+              <table class="compare-table">
+                <thead>
+                  <tr>
+                    <th class="clickable-th" data-tab="all" title="点击定位卡片">推荐级别与名称 <i>↓</i></th>
+                    <th class="clickable-th" data-tab="line" title="点击按【线路架构】筛选并滑动">🌐 线路架构特色 <i>↓</i></th>
+                    <th class="clickable-th" data-tab="exp" title="点击按【使用体验】筛选并滑动">📱 客户端与体验 <i>↓</i></th>
+                    <th class="clickable-th" data-tab="peak" title="点击按【晚高峰表现】筛选并滑动">⚡ 晚高峰表现 <i>↓</i></th>
+                    <th class="clickable-th" data-tab="holiday" title="点击按【节假日灾备】筛选并滑动">🛡️ 节假日灾备能力 <i>↓</i></th>
+                    <th class="clickable-th" data-tab="check" title="点击按【购买前必查】筛选并滑动">💡 购买前重点核对 <i>↓</i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row-top1">
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-top1">👑 首推</span>
+                        <a href="#airport-01" class="table-jump-link"><b>01 · 闪电鼠</b></a>
+                        <a href="https://chenpin.shandianshuaff.com/#/?code=m28TvPVX" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>隧道中转 + 常用机房</td>
+                    <td>一键导入，新手无门槛</td>
+                    <td>自动负载分流，基础限速</td>
+                    <td>入口域名自动轮换更新</td>
+                    <td>套餐有效期、退款期限</td>
+                  </tr>
+                  <tr class="row-top2">
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-top2">⭐ 次推</span>
+                        <a href="#airport-02" class="table-jump-link"><b>02 · 大佬云</b></a>
+                        <a href="https://chenpin01.dalaoyunaff.com/#/?code=GQ6CL6Km" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>主干中转 + 不限时流量包</td>
+                    <td>多设备协同，社群活跃</td>
+                    <td>4K 视频平稳，大流量抗压</td>
+                    <td>备用镜像订阅地址与公告</td>
+                    <td>流量重置规则、并发限制</td>
+                  </tr>
+                  <tr class="row-top3">
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-top3">🌟 三推</span>
+                        <a href="#airport-03" class="table-jump-link"><b>03 · 神行加速</b></a>
+                        <a href="https://chenpingan01.shenxingaff.com/#/?code=RZ48f9wP" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>BGP 入口 + 流媒体专线</td>
+                    <td>多平台 (iOS/Win/Mac) 兼容</td>
+                    <td>流媒体解锁流畅，低延迟抖动</td>
+                    <td>抗封锁防封协议 (VLESS)</td>
+                    <td>客户端版本要求、订阅转换</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">四推</span>
+                        <a href="#airport-04" class="table-jump-link"><b>04 · 云界线</b></a>
+                        <a href="https://chenpingan.yunjiexianaff.com/#/?code=xLJGaIHM" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>中转 + 专线混合架构</td>
+                    <td>自动订阅托管，界面清晰</td>
+                    <td>丢包率低，适合大文件下载</td>
+                    <td>定期轮换入口 IP 与域名</td>
+                    <td>流量倍率、续费价格变动</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">五推</span>
+                        <a href="#airport-05" class="table-jump-link"><b>05 · 榴莲云</b></a>
+                        <a href="https://chenpingan.liulianyunaff.com/#/?code=7pdjs9zt" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>多机房冗余中转</td>
+                    <td>文档完善，适合做备用号</td>
+                    <td>拥塞自动切线，网页响应快</td>
+                    <td>透明售后通告，故障处理快</td>
+                    <td>条款完整度、售后渠道</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">六推</span>
+                        <a href="#airport-06" class="table-jump-link"><b>06 · 环球梯</b></a>
+                        <a href="https://chenpingan01.huanqiutiaff.com/#/?code=FGCcYdFo" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>跨境优化中转线路</td>
+                    <td>全平台完美兼容 (Clash/小火箭)</td>
+                    <td>高带宽余量，多设备共享顺畅</td>
+                    <td>节点自动容灾与多域名解析</td>
+                    <td>设备并发上线、故障通告</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">七推</span>
+                        <a href="#airport-07" class="table-jump-link"><b>07 · 极连云</b></a>
+                        <a href="https://haozevpn.jlyvipaff.com/#/?code=6h2TMD5b" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>极速中转 + 高吞吐节点</td>
+                    <td>极简配置导入，上手快</td>
+                    <td>上下行均衡，高清直播无缓冲</td>
+                    <td>故障节点快速下线与镜像切线</td>
+                    <td>注册页套餐表格、设备数限制</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">八推</span>
+                        <a href="#airport-08" class="table-jump-link"><b>08 · 光年梯</b></a>
+                        <a href="https://gnt001.gntvipaff.cc/#/?code=rN3ybxa7" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>多专线 + 广覆盖节点</td>
+                    <td>多设备同步导入，兼容性优秀</td>
+                    <td>抗拥堵防抖动，游戏/语音平稳</td>
+                    <td>特殊时期备用入口切换迅速</td>
+                    <td>流量重置周期、在线设备数</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">九推</span>
+                        <a href="#airport-09" class="table-jump-link"><b>09 · 边缘节点</b></a>
+                        <a href="https://wep.edgenovaaff.com/#/?code=papME7sh" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>VLESS Reality / 边缘优化</td>
+                    <td>进阶用户首选，协议新颖</td>
+                    <td>复杂网络穿透强，低延迟</td>
+                    <td>协议特征伪装强，防封锁定极高</td>
+                    <td>客户端协议支持、第三方订阅</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十推</span>
+                        <a href="#airport-10" class="table-jump-link"><b>10 · 速界</b></a>
+                        <a href="https://pygllc.speedworldaff.cc/#/?code=ll8LjYBJ" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>性价比中转与大流量档</td>
+                    <td>适合预算有限、大流量用户</td>
+                    <td>热门节点易拥堵，建议避峰或切线</td>
+                    <td>工单技术支持与紧急域名通告</td>
+                    <td>倍率隐藏扣费、退款条件</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十一推</span>
+                        <a href="#airport-11" class="table-jump-link"><b>11 · 可信云</b></a>
+                        <a href="https://everett7623.kosingaff.com//#/?code=Jl6dWU0G" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>安全防护中转 + 统一域名</td>
+                    <td>账号安全规范，一键导入</td>
+                    <td>整体稳定性高，波动小</td>
+                    <td>防护等级高，敏感时期稳定</td>
+                    <td>域名一致性、日志说明与找回</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十二推</span>
+                        <a href="#airport-12" class="table-jump-link"><b>12 · 快狸</b></a>
+                        <a href="https://fanxiaobin.kuailiaff.com/#/?code=sOX6N4Tp" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>多节点分流，轻度浏览</td>
+                    <td>引导生动，客户端兼容良好</td>
+                    <td>适合网页、社交与中等画质</td>
+                    <td>基础节点灾备与域名轮换</td>
+                    <td>设备限制、流量计算规则</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十三推</span>
+                        <a href="#airport-13" class="table-jump-link"><b>13 · 瞬云</b></a>
+                        <a href="https://ddd.jichang.best/#/register?code=weN73kGq" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>短周期套餐 + 不限时按量包</td>
+                    <td>短周期试用、应急备用佳选</td>
+                    <td>短期冲刺速度快，下载顺畅</td>
+                    <td>工单急救与备用节点自动推送</td>
+                    <td>短期套餐退款政策、工单速度</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十四推</span>
+                        <a href="#airport-14" class="table-jump-link"><b>14 · 云图</b></a>
+                        <a href="https://super.ytjcok.org/#/register?code=BKvuyYJI" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>规范化中转线路</td>
+                    <td>支持多种标准订阅格式</td>
+                    <td>负载均衡优秀，极少全连不上</td>
+                    <td>自动更新域名与备用节点分流</td>
+                    <td>客户端兼容要求、退款条件</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十五推</span>
+                        <a href="#airport-15" class="table-jump-link"><b>15 · 鲲鹏加速</b></a>
+                        <a href="https://kunpengjiasu.com/#/register?code=oBWoiCcv" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>低门槛中转，支持极低试用</td>
+                    <td>适合多设备家庭与办公协同</td>
+                    <td>分级带宽分配，高级套餐优先</td>
+                    <td>团队维护及时，备用节点上线快</td>
+                    <td>套餐有效期、隐私安全条款</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-airport-cell">
+                        <span class="rank-tag tag-sub">十六推</span>
+                        <a href="#airport-16" class="table-jump-link"><b>16 · Flybit</b></a>
+                        <a href="https://www.fastfastfast.buzz/#/register?code=tuAiVVbP" target="_blank" rel="sponsored noopener" class="table-link-btn">官网 ↗</a>
+                      </div>
+                    </td>
+                    <td>月付流量档 + 不限时总量包</td>
+                    <td>适合不常上网但需随时连通者</td>
+                    <td>按量包高峰速度稳，不按月清零</td>
+                    <td>多域名解析备份，长期备用韧性强</td>
+                    <td>注册条款、防失联域名说明</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 16 候选深度对比卡片列表 -->
+          <section class="compare-grid-layout" id="compare-cards">
+
+            <!-- 01 闪电鼠 -->
+            <article class="compare-card card-top1" id="airport-01">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>01 · 闪电鼠</h2>
+                </div>
+                <span class="compare-rank-badge badge-top1">👑 站长首推对比基线</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">采用多节点隧道中转 + 常用机房架构，覆盖香港、日本、新加坡、美国等热门地区，节点倍率标注清晰，适合作为选购基线。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">支持 Clash, Shadowrocket, Sing-box 及 v2rayN 一键导入；教程引导完整，新手试用门槛低。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰（20:00 - 24:00）基础节点可能存在轻微 QoS 限速，核心中转线路启用负载均衡后能保持 4K 顺畅。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">具备入口域名自动轮换机制，遇封锁只需在客户端刷新订阅即可拉取最新可用入口。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">核对套餐有效期、年付与月付折算价差异，以及退款期限与工单沟通入口。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：首选试用、建立比较基线的新用户</span>
+                <a class="button primary sponsored-link" href="https://chenpin.shandianshuaff.com/#/?code=m28TvPVX" target="_blank" rel="sponsored noopener">了解闪电鼠 ↗</a>
+              </div>
+            </article>
+
+            <!-- 02 大佬云 -->
+            <article class="compare-card card-top2" id="airport-02">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>02 · 大佬云</h2>
+                </div>
+                <span class="compare-rank-badge badge-top2">⭐ 站长次推大流量</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">主干中转线路配搭海外多云节点，不仅提供月付与年付大流量包，还特别支持不限时总量包。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">支持多设备协同接入，节点订阅更新迅速，Telegram 社群与客服工单响应较为规范。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰大流量节点抗压能力强，高码率 4K 视频加载迅速，缓冲时间短。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">提供备用镜像订阅地址与 Telegram 紧急公告频道，灾备恢复时效较好。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">重点查看流量重置规则（账单月/自然月）、并发设备限制与续费原价说明。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：大流量与多设备并行用户</span>
+                <a class="button primary sponsored-link" href="https://chenpin01.dalaoyunaff.com/#/?code=GQ6CL6Km" target="_blank" rel="sponsored noopener">了解大佬云 ↗</a>
+              </div>
+            </article>
+
+            <!-- 03 神行加速 -->
+            <article class="compare-card card-top3" id="airport-03">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>03 · 神行加速</h2>
+                </div>
+                <span class="compare-rank-badge badge-top3">🌟 站长三推全兼容</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">优化 BGP 多线入口中转，专线与普通节点区分清晰，包含原生 IP 流媒体解锁节点。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">极度重视全平台客户端兼容性（iOS/Android/Windows/macOS），全套导入教程一应俱全。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰针对 YouTube / Netflix / Disney+ 进行优化，延迟抖动控制优秀，适合看剧与网页游戏。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">配备防封锁协议节点与备用线路，特殊时期拥堵时可快速切换至备用入口。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">检查自己的客户端版本要求、是否需要订阅转换，以及售后退款支持条件。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：看重多端兼容与流媒体解锁者</span>
+                <a class="button primary sponsored-link" href="https://chenpingan01.shenxingaff.com/#/?code=RZ48f9wP" target="_blank" rel="sponsored noopener">了解神行加速 ↗</a>
+              </div>
+            </article>
+
+            <!-- 04 云界线 -->
+            <article class="compare-card" id="airport-04">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>04 · 云界线</h2>
+                </div>
+                <span class="compare-rank-badge">四推性价比</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">采用中转 + 专线混合架构，提供多套餐梯度与不限时随心包，性价比优势明显。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">控制面板简洁大方，支持自动订阅托管与一键导入，新手操作极其顺畅。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰传输吞吐量稳定，丢包率控制在较低水平，大文件下载与长视频流畅。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">定期轮换入口 IP 与防护域名，避免因单点故障导致全盘离线。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">核对各节点的流量消耗倍率（防止高倍率隐性扣费）及续费价格变动。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：关注长期使用成本与稳定下载者</span>
+                <a class="button primary sponsored-link" href="https://chenpingan.yunjiexianaff.com/#/?code=xLJGaIHM" target="_blank" rel="sponsored noopener">了解云界线 ↗</a>
+              </div>
+            </article>
+
+            <!-- 05 榴莲云 -->
+            <article class="compare-card" id="airport-05">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>05 · 榴莲云</h2>
+                </div>
+                <span class="compare-rank-badge">五推透明备用</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">多机房冗余中转，覆盖常规热门地区及部分冷门节点，方便不同网络运营商匹配。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">文档与服务条款完善，适合作为第二套备用机场保存，随时应对主梯故障。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰拥塞时段支持自动切线与智能分流，社交软件与网页秒开。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">拥有公开透明的售后维护频道，节点发生异常时故障公告发布迅速。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">确认服务条款完整度、公告通知入口及售后工单处理方式。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：需要保留透明备用链路的用户</span>
+                <a class="button primary sponsored-link" href="https://chenpingan.liulianyunaff.com/#/?code=7pdjs9zt" target="_blank" rel="sponsored noopener">了解榴莲云 ↗</a>
+              </div>
+            </article>
+
+            <!-- 06 环球梯 -->
+            <article class="compare-card" id="airport-06">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>06 · 环球梯</h2>
+                </div>
+                <span class="compare-rank-badge">六推多设备</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">跨境优化中转线路，专针对多设备同时在线与大带宽传输场景调优。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">兼容 Clash Party, Shadowrocket, Sing-box 等几乎全系客户端，订阅更新成功率高。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰带宽余量充足，多设备同时连接时不抢占速度，播放高画质视频不卡顿。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">支持节点自动容灾与多域名解析备份，具备良好的防封锁能力。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">看清允许的设备并发上线数、售后故障通告入口及退款边界。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：多设备全家共享与高频更新者</span>
+                <a class="button primary sponsored-link" href="https://chenpingan01.huanqiutiaff.com/#/?code=FGCcYdFo" target="_blank" rel="sponsored noopener">了解环球梯 ↗</a>
+              </div>
+            </article>
+
+            <!-- 07 极连云 -->
+            <article class="compare-card" id="airport-07">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>07 · 极连云</h2>
+                </div>
+                <span class="compare-rank-badge">七推极速型</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">主打极速中转与高吞吐节点，针对大流量高清视频和下载需求特别调优。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">注册与配置流程极简，适合追求快速上手、不想研究复杂参数的新手。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰上行下行速率均衡，高清直播与 4K 视频进度条随意拖拽无缓冲。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">拥有故障节点快速下线与镜像入口实时切换能力，减少封锁停运时长。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">购买前务必登录后台确认最新套餐表格、流量分配与设备数规则。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：追求快速上手与高清直播者</span>
+                <a class="button primary sponsored-link" href="https://haozevpn.jlyvipaff.com/#/?code=6h2TMD5b" target="_blank" rel="sponsored noopener">了解极连云 ↗</a>
+              </div>
+            </article>
+
+            <!-- 08 光年梯 -->
+            <article class="compare-card" id="airport-08">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>08 · 光年梯</h2>
+                </div>
+                <span class="compare-rank-badge">八推广覆盖</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">多专线 + 中转混合覆盖，节点范围广，包含港、日、韩、新、美及欧洲多国节点。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">支持多设备同步导入，与主流客户端（Clash / Sing-box / 小火箭）兼容良好。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰抗拥堵防抖动表现突出，网页游戏与实时语音通话延迟平稳。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">特殊时期备用入口切换迅速，官方维护与域名更新通告及时。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">检查流量重置周期、多设备同时在线限制及节点维护公告频道。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：需要广泛节点覆盖与低延迟通话者</span>
+                <a class="button primary sponsored-link" href="https://gnt001.gntvipaff.cc/#/?code=rN3ybxa7" target="_blank" rel="sponsored noopener">了解光年梯 ↗</a>
+              </div>
+            </article>
+
+            <!-- 09 边缘节点 -->
+            <article class="compare-card" id="airport-09">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>09 · 边缘节点</h2>
+                </div>
+                <span class="compare-rank-badge">九推新协议</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">基于新技术协议（如 VLESS Reality / Hysteria2）的边缘优化线路，兼顾直连与中转。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">适合对新协议、专属客户端或个性化配置有偏好的进阶玩家。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰在复杂网络环境下穿透力极强，单线程与多线程下载速度均表现亮眼。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">抗封锁能力优异，依靠协议伪装特征躲避 DPI 深度包检测。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">确认自己的客户端（如 Sing-box/Clash-Meta）是否支持相关协议及是否允许第三方订阅。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：偏好新技术协议与强穿透力进阶玩家</span>
+                <a class="button primary sponsored-link" href="https://wep.edgenovaaff.com/#/?code=papME7sh" target="_blank" rel="sponsored noopener">了解边缘节点 ↗</a>
+              </div>
+            </article>
+
+            <!-- 10 速界 -->
+            <article class="compare-card" id="airport-10">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>10 · 速界</h2>
+                </div>
+                <span class="compare-rank-badge">十推性价比档</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">提供多档位月付与大流量套餐，线路主打高性价比中转与灵活月付。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">适合预算有限、需要大流量的用户，建议先从小周期月付体验入手。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰热门节点受限于总带宽可能存在拥堵，建议避开热门节点或手动切线。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">提供工单技术支持与紧急域名通告，灾备恢复按工单顺序处理。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">查看套餐有效期、流量计算倍率（防止高倍率扣费）及退款限制。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：预算有限、寻求低成本大流量者</span>
+                <a class="button primary sponsored-link" href="https://pygllc.speedworldaff.cc/#/?code=ll8LjYBJ" target="_blank" rel="sponsored noopener">了解速界 ↗</a>
+              </div>
+            </article>
+
+            <!-- 11 可信云 -->
+            <article class="compare-card" id="airport-11">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>11 · 可信云</h2>
+                </div>
+                <span class="compare-rank-badge">十一推安全防护</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">注重域名一致性与安全防护的中转线路，节点配置规范、域名可信度高。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">注重隐私与账号安全，注册与找回机制严谨，订阅支持一键轻松导入。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰整体连接稳定性高，波动幅度小，连续在线不掉线。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">域名与服务器节点安全防护等级高，敏感时期掉线率低。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">核对入口域名真实性、日志留存说明及账号密码找回规则。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：特别看重域名一致性与隐私防护者</span>
+                <a class="button primary sponsored-link" href="https://everett7623.kosingaff.com//#/?code=Jl6dWU0G" target="_blank" rel="sponsored noopener">了解可信云 ↗</a>
+              </div>
+            </article>
+
+            <!-- 12 快狸 -->
+            <article class="compare-card" id="airport-12">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>12 · 快狸</h2>
+                </div>
+                <span class="compare-rank-badge">十二推轻度分流</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">多节点分流架构，兼顾日常轻度使用、社交浏览与学习需求。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">注册界面简洁生动，客户端配置引导直观，客服回应较为礼貌。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰适合社交、网页浏览与 1080P 中等画质视频。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">具备基础节点灾备与域名轮换能力，遇故障有公告指引。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">核对支持的设备类型、流量计算规则与客服回应时效。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：轻度上网、社交与日常学习者</span>
+                <a class="button primary sponsored-link" href="https://fanxiaobin.kuailiaff.com/#/?code=sOX6N4Tp" target="_blank" rel="sponsored noopener">了解快狸 ↗</a>
+              </div>
+            </article>
+
+            <!-- 13 瞬云 -->
+            <article class="compare-card" id="airport-13">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>13 · 瞬云</h2>
+                </div>
+                <span class="compare-rank-badge">十三推短周期</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">短周期灵活套餐与不限时流量包结合，中转线路响应快。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">适合短周期试用或作为临时应急备用梯子，避免长期绑定。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰短时间冲刺速度快，适合临时大流量文件下载。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">提供工单急救与备用节点订阅更新，恢复机制透明。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">确认短期套餐退款政策、工单处理速度及节点维护频率。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：寻求短周期试用与应急备用者</span>
+                <a class="button primary sponsored-link" href="https://ddd.jichang.best/#/register?code=weN73kGq" target="_blank" rel="sponsored noopener">了解瞬云 ↗</a>
+              </div>
+            </article>
+
+            <!-- 14 云图 -->
+            <article class="compare-card" id="airport-14">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>14 · 云图</h2>
+                </div>
+                <span class="compare-rank-badge">十四推标准格式</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">规范化中转线路，支持多种标准订阅格式（Clash / Surge / Shadowrocket）。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">客户端兼容度好，使用说明文档结构清晰，订阅更新稳定。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰各节点负载均衡较好，很少出现所有节点全部失效的情况。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">具备自动更新域名与备用节点分流机制。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">购买前核对自己的客户端版本、更新方式及退款条件。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：看重多格式订阅标准与稳定更新者</span>
+                <a class="button primary sponsored-link" href="https://super.ytjcok.org/#/register?code=BKvuyYJI" target="_blank" rel="sponsored noopener">了解云图 ↗</a>
+              </div>
+            </article>
+
+            <!-- 15 鲲鹏加速 -->
+            <article class="compare-card" id="airport-15">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>15 · 鲲鹏加速</h2>
+                </div>
+                <span class="compare-rank-badge">十五推低门槛</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">多平台多设备适用的中转线路，套餐门槛极低（支持极低成本体验包）。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">上手简单，适合多设备家庭或多办公设备共同使用。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">晚高峰根据套餐层级分流，高级套餐拥有优先带宽保证。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">运营团队维护及时，特殊时期有应急替代节点上线。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">核对套餐有效期、隐私安全条款及售后工单入口。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：预算极低、需要多设备协同者</span>
+                <a class="button primary sponsored-link" href="https://kunpengjiasu.com/#/register?code=oBWoiCcv" target="_blank" rel="sponsored noopener">了解鲲鹏加速 ↗</a>
+              </div>
+            </article>
+
+            <!-- 16 Flybit -->
+            <article class="compare-card" id="airport-16">
+              <div class="compare-card-header">
+                <div class="compare-card-title">
+                  <h2>16 · Flybit</h2>
+                </div>
+                <span class="compare-rank-badge">十六推不限时包</span>
+              </div>
+              <div class="dim-group dim-line">
+                <div class="dim-title">🌐 线路架构</div>
+                <p class="dim-desc">提供灵活的月付流量档与不限时按量付费（PAYG）方案，中转线路覆盖广。</p>
+              </div>
+              <div class="dim-group dim-exp">
+                <div class="dim-title">📱 使用体验</div>
+                <p class="dim-desc">作为补充与备用候选，适合不常上网但需要随时能连通的用户。</p>
+              </div>
+              <div class="dim-group dim-peak">
+                <div class="dim-title">⚡ 晚高峰表现</div>
+                <p class="dim-desc">按量付费节点高峰期速度稳定，流量不按月清零更省钱。</p>
+              </div>
+              <div class="dim-group dim-holiday">
+                <div class="dim-title">🛡️ 节假日灾备</div>
+                <p class="dim-desc">多域名解析备份，具备良好的长期防失联与灾备韧性。</p>
+              </div>
+              <div class="dim-group dim-check">
+                <div class="dim-title">💡 购买前必查</div>
+                <p class="dim-desc">查看注册条款、域名防失联说明及配置导入方式。</p>
+              </div>
+              <div class="compare-card-footer">
+                <span class="muted font-bold">适合：低频上网、需要不限时总量包备用者</span>
+                <a class="button primary sponsored-link" href="https://www.fastfastfast.buzz/#/register?code=tuAiVVbP" target="_blank" rel="sponsored noopener">了解 Flybit ↗</a>
+              </div>
+            </article>
+
+          </section>
+
+          <!-- 旺仔对比方法与避坑指南 -->
+          <section class="compare-guide-section">
+            <p class="eyebrow">旺仔讲人话 · 横向对比选购心法</p>
+            <h2 class="margin-0 font-bold">买前先看 4 个真理，少走弯路多走旺路</h2>
+            <div class="compare-guide-grid">
+              <article class="compare-guide-item">
+                <h3>1. 别拿单次测速跑满当稳定性</h3>
+                <p>单次测速只代表那一秒该节点的下行峰值。真实体验取决于晚高峰（20:00-24:00）的丢包率、延迟抖动与带宽余量。选购时优先看晚高峰抗拥堵能力。</p>
+              </article>
+              <article class="compare-guide-item">
+                <h3>2. 节假日防封锁看域名与备用入口</h3>
+                <p>敏感时期或节假日，主域名和部分中转 IP 容易受影响。优质服务商会提供动态订阅更新、备用域名轮换或防封协议（如 VLESS Reality / Hysteria2）。</p>
+              </article>
+              <article class="compare-guide-item">
+                <h3>3. 警惕倍率陷阱与续费价格</h3>
+                <p>宣传的“1000G大流量”如果全挂着 3x/5x 的高倍率节点，实际可用流量就会大打折扣。购买前务必在后台核对节点倍率与续费原价。</p>
+              </article>
+              <article class="compare-guide-item">
+                <h3>4. 先月后年，保留第二备用号</h3>
+                <p>任何机场都可能因上游线路或政策调整发生波动。建议先用月付或低门槛套餐试用，同时配置一个不限时的按量包（如大佬云、Flybit、云界线）作为第二备用链路。</p>
+              </article>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- 右侧粘性侧边栏 (Airport Navigation Sidebar on RIGHT) -->
+        <aside class="airport-sidebar" aria-label="16 个机场对比直达目录">
+          <div class="airport-sidebar-title">
+            <span>旺仔对比导航</span>
+            <strong>16 个机场直达目录</strong>
+            <small>按推荐顺序划分首推与次推</small>
+          </div>
+          <nav class="airport-sidebar-nav">
+            <a href="#airport-01"><b>01</b><span>闪电鼠</span><em>首推</em></a>
+            <a href="#airport-02"><b>02</b><span>大佬云</span><em>次推</em></a>
+            <a href="#airport-03"><b>03</b><span>神行加速</span><em>三推</em></a>
+            <a href="#airport-04"><b>04</b><span>云界线</span></a>
+            <a href="#airport-05"><b>05</b><span>榴莲云</span></a>
+            <a href="#airport-06"><b>06</b><span>环球梯</span></a>
+            <a href="#airport-07"><b>07</b><span>极连云</span></a>
+            <a href="#airport-08"><b>08</b><span>光年梯</span></a>
+            <a href="#airport-09"><b>09</b><span>边缘节点</span></a>
+            <a href="#airport-10"><b>10</b><span>速界</span></a>
+            <a href="#airport-11"><b>11</b><span>可信云</span></a>
+            <a href="#airport-12"><b>12</b><span>快狸</span></a>
+            <a href="#airport-13"><b>13</b><span>瞬云</span></a>
+            <a href="#airport-14"><b>14</b><span>云图</span></a>
+            <a href="#airport-15"><b>15</b><span>鲲鹏加速</span></a>
+            <a href="#airport-16"><b>16</b><span>Flybit</span></a>
+          </nav>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-bottom">
+      <span>© 2026 旺仔旺旺旺 · 狗子帮你排雷，复杂问题讲人话</span>
+      <a href="goodies.html">旺仔推荐</a>
+      <a href="policy.html">编辑与推广政策</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button>
+
+  <script>
+    // Tab switching for compare page dimensions and smooth scrolling jump
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.compare-tab-btn');
+      const clickableThs = document.querySelectorAll('th.clickable-th');
+      const dimGroups = document.querySelectorAll('.dim-group');
+      const cardsSection = document.querySelector('#compare-cards');
+
+      function switchDimension(targetTab, shouldScroll = true) {
+        tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === targetTab));
+
+        if (targetTab === 'all') {
+          dimGroups.forEach(g => g.style.display = 'block');
+        } else {
+          dimGroups.forEach(g => {
+            g.style.display = g.classList.contains(`dim-${targetTab}`) ? 'block' : 'none';
+          });
+        }
+
+        if (shouldScroll && cardsSection) {
+          cardsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          switchDimension(tab.dataset.tab, true);
+        });
+      });
+
+      clickableThs.forEach(th => {
+        th.addEventListener('click', () => {
+          const tab = th.dataset.tab;
+          if (tab) {
+            switchDimension(tab, true);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
