@@ -1,1 +1,514 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>急救锦囊｜VPN 与网络故障排查｜新年旺旺旺</title><meta name="description" content="按症状排查 VPN、DNS、订阅更新、连接超时和设备网络故障。"><link rel="stylesheet" href="assets/styles.css"><script defer src="assets/app.js"></script></head><body><a class="skip-link" href="#main">跳到正文</a><header class="site-header"><a class="brand" href="index.html"><span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span><span>新年旺旺旺</span></a><button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button><nav id="site-nav" class="site-nav" aria-label="主导航"><a href="index.html">首页</a><a class="nav-branded" href="goodies.html">旺仔推荐</a><a class="nav-branded" href="toolbox.html">百宝狗窝</a><a class="nav-branded" aria-current="page" href="help.html">急救锦囊</a><a class="nav-branded" href="pitfall.html">排雷哨所</a><a class="nav-branded" href="fun.html">快乐源泉</a><a href="articles.html">文章</a><a href="about.html">关于旺仔</a><a href="policy.html">编辑政策</a></nav></header><main id="main"><section class="page-hero"><div class="wrap"><p class="eyebrow">急救锦囊 · 先救急，再复盘</p><h1>网络卡住了？先别乱点。</h1><p>从连接、DNS、订阅、系统代理和设备权限逐层检查，记录错误再决定下一步。</p></div></section><section class="wrap topic-hubs" style="padding-block:54px"><a href="articles/vpn-connected-no-internet.html"><strong>VPN 已连接但无法上网</strong><span>路由、DNS 与 Kill Switch 排查</span></a><a href="articles/vpn-connection-timeout.html"><strong>VPN 连接超时</strong><span>服务器、端口、协议和网络分层检查</span></a><a href="articles/airport-subscription-update-failed.html"><strong>订阅更新失败</strong><span>HTTP 状态、证书与配置解析</span></a><a href="articles/vpn-dns-leak-fix.html"><strong>DNS 泄露怎么排查</strong><span>分清解析路径和检测误报</span></a></section></main><footer class="site-footer"><div class="wrap footer-bottom"><span>© 2026 旺仔旺旺旺</span><a href="policy.html">编辑政策</a></div></footer><button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026翻墙梯子福利排雷｜急救锦囊 掉线断网应急抢救指南｜梯子旺旺旺</title>
+  <meta name="description" content="梯子掉线、节点全红超时、已连接无法上网、断网死锁怎么排查？旺仔急救锦囊提供 3 分钟极速抢救方案。">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/app.js"></script>
+  <style>
+    .help-hero {
+      background: var(--pink-soft);
+      border-bottom: var(--border);
+      padding: 46px 0;
+      text-align: center;
+    }
+    .help-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 12px 0;
+      font-weight: 950;
+    }
+    .help-hero p {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #3d3733;
+    }
+
+    /* 紧急症状选择器 */
+    .symptom-tabs-wrapper {
+      background: #fff;
+      border-bottom: var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 72px;
+      z-index: 20;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .symptom-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .symptom-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 950;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .symptom-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
+      background: var(--yellow);
+    }
+    .symptom-btn.active {
+      background: var(--pink);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .symptom-btn em {
+      font-style: normal;
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      background: #ffe3e9;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: #a42e4c;
+      font-weight: 950;
+    }
+
+    /* 抢救指南主容器 */
+    .help-container {
+      padding: 40px 0 80px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding-inline: clamp(20px, 3.5vw, 60px);
+      margin: 0;
+      margin: 0 auto;
+    }
+
+    .help-card {
+      background: #fff;
+      border: var(--border);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 6px 6px 0 var(--ink);
+      margin-bottom: 32px;
+      scroll-margin-top: 150px;
+    }
+    .help-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 2px dashed var(--ink);
+      margin-bottom: 20px;
+    }
+    .help-card-header h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .emergency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      background: #ffe0e0;
+      color: #c12e53;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 950;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .symptom-desc {
+      background: #fff8e8;
+      border: 1.5px solid var(--ink);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.94rem;
+      line-height: 1.6;
+      color: #3d3632;
+    }
+
+    /* 救急步骤清单 */
+    .rescue-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 900px) {
+      .rescue-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rescue-step-item {
+      background: #fffdf5;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .rescue-step-item strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .rescue-step-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #524a45;
+    }
+
+    .dog-rescue-tip {
+      background: #fff0a8;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      font-weight: 850;
+      color: var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    /* 极速自测 Checklist */
+    .checklist-section {
+      background: #fffdf0;
+      border: var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 6px 6px 0 var(--ink);
+      margin-top: 50px;
+    }
+    .checklist-section h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .checklist-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+      cursor: pointer;
+      user-select: none;
+    }
+    .checklist-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--pink);
+      cursor: pointer;
+    }
+    .checklist-item span {
+      font-weight: 850;
+      font-size: 0.94rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span>
+      <span class="brand-fun-logo">
+        <span class="fun-char char-ti">梯</span>
+        <span class="fun-char char-zi">子</span>
+        <span class="fun-char char-w1">旺</span>
+        <span class="fun-char char-w2">旺</span>
+        <span class="fun-char char-w3">旺</span>
+        <span class="fun-badge">⚡2026福利排雷</span>
+      </span>
+    </a>
+    <button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button>
+    <nav id="site-nav" class="site-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <div class="nav-dropdown">
+        <a class="nav-branded" href="goodies.html">旺仔推荐 ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="value.html">⚖️ 旺仔性价比</a>
+          <a href="compare.html">📊 旺仔对比</a>
+        </div>
+      </div>
+      <a class="nav-branded" href="toolbox.html">百宝狗窝</a>
+      <a class="nav-branded" aria-current="page" href="help.html">急救锦囊</a>
+      <a class="nav-branded" href="pitfall.html">排雷哨所</a>
+      <a class="nav-branded" href="fun.html">快乐源泉</a>
+      <a href="articles.html">文章</a>
+      <a href="about.html">关于旺仔</a>
+      <a href="articles/shadowrocket-download-official.html">apple免费账号</a>
+      <a href="policy.html">编辑政策</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero 区域 -->
+    <section class="help-hero">
+      <div class="wrap">
+        <p class="eyebrow">🚑 2026 翻墙梯子福利排雷 · 急救锦囊</p>
+        <h1>🚑 2026 翻墙梯子福利排雷 ⚡ 掉线断网应急抢救指南！🐕</h1>
+        <p>网络频繁掉线？节点全红死光？显示已连接但无 Internet？关掉软件后连百度都打不开了？<b>别慌！看门犬旺仔狗爪 3 分钟带你恢复通畅！</b></p>
+      </div>
+    </section>
+
+    <!-- 急救症状 Selector -->
+    <div class="symptom-tabs-wrapper">
+      <div class="wrap">
+        <div class="symptom-tabs">
+          <button class="symptom-btn active" data-target="help-card-1">
+            💥 节点全部死光 / 延迟超时 <em>急急急</em>
+          </button>
+          <button class="symptom-btn" data-target="help-card-2">
+            💔 已连接但网页死活打不开 <em>卡死</em>
+          </button>
+          <button class="symptom-btn" data-target="help-card-3">
+            🔄 频繁断线掉线，抽风反复 <em>抽风</em>
+          </button>
+          <button class="symptom-btn" data-target="help-card-4">
+            🔒 关软件后连国内也断网了 <em>死锁</em>
+          </button>
+          <button class="symptom-btn" data-target="help-card-5">
+            🛑 订阅更新报错 404 / Net Error <em>故障</em>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-container">
+
+      <!-- 抢救 1：节点全部死光 -->
+      <article id="help-card-1" class="help-card">
+        <div class="help-card-header">
+          <h2>💥 症状 1：节点全部变红 / 延迟显示 Timeout 或 N/A (死光了)</h2>
+          <span class="emergency-badge">🚨 紧急度：★★★★★</span>
+        </div>
+        <div class="symptom-desc">
+          <b>😫 痛苦现场：</b>点击测试延迟，列表中所有的节点瞬间全变成了刺眼的血红色，一个绿色的都没有！按连接直接报错或无限转圈。
+        </div>
+
+        <div class="rescue-steps">
+          <div class="rescue-step-item">
+            <strong>1. 排查本地宽带 WiFi</strong>
+            <p>先关闭手机 WiFi，切成手机 4G/5G 移动热点测试！如果切移动网络后正常，说明是你家宽带运营商临时封锁了节点 IP。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>2. 刷新最新订阅域名</strong>
+            <p>主界面往下拉【更新订阅】！如果机场主域名被封，更新订阅会自动拉取最新的备用节点 IP 入口。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>3. 切换抗封锁新协议</strong>
+            <p>在机场后台或软件节点列表中，优先选择 <b>Hysteria2、VLESS Reality</b> 或 <b>ShadowTLS</b> 协议节点，抗封能力远超旧协议！</p>
+          </div>
+        </div>
+
+        <div class="dog-rescue-tip">
+          🐕 <b>旺仔保命秘籍：</b>节点全红 90% 是因为机场的主入口域名被小黑屋了！去机场的 Telegram 官方通告频道，直接拿最新的备用订阅链接重新粘贴导入，秒复活！
+        </div>
+      </article>
+
+      <!-- 抢救 2：显示已连接但无法上网 -->
+      <article id="help-card-2" class="help-card">
+        <div class="help-card-header">
+          <h2>💔 症状 2：显示已连接，但网页死活打不开 (死挂着)</h2>
+          <span class="emergency-badge">🚨 紧急度：★★★★☆</span>
+        </div>
+        <div class="symptom-desc">
+          <b>😫 痛苦现场：</b>小火箭/Clash 开关显示绿色的“已连接”，顶部 VPN 图标也亮了，但 Safari 或 Chrome 浏览器就是打不开任何网页！
+        </div>
+
+        <div class="rescue-steps">
+          <div class="rescue-step-item">
+            <strong>1. 检查代理路由模式</strong>
+            <p>打开软件设置，确保代理模式选择的是 <b>【Rule / 配置 / 绕过大陆】</b>，千万不要误选成“Direct (直连)”。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>2. 清理系统 DNS 缓存</strong>
+            <p>Windows 按 `Win+R` 输入 `cmd`，运行 `ipconfig /flushdns`；手机开启一次【飞行模式】5 秒后再关闭，强制刷新 DNS。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>3. 修改软件内 DNS 劫持</strong>
+            <p>在 Clash / 小火箭的 DNS 设置中，把 Remote DNS 改为 `1.1.1.1` 或 `8.8.8.8`，防止本地运营商 DNS 污染。</p>
+          </div>
+        </div>
+
+        <div class="dog-rescue-tip">
+          💡 <b>旺仔狗爪比喻：</b>这就好比主水管通了，但你家水龙头盖子没拧开！清理一次 DNS 缓存，管道就能一泻千里通畅了！
+        </div>
+      </article>
+
+      <!-- 抢救 3：频繁掉线抽风 -->
+      <article id="help-card-3" class="help-card">
+        <div class="help-card-header">
+          <h2>🔄 症状 3：网络像抽风一样，频繁断线掉线，看视频疯狂缓冲</h2>
+          <span class="emergency-badge">🚨 紧急度：★★★☆☆</span>
+        </div>
+        <div class="symptom-desc">
+          <b>😫 痛苦现场：</b>看视频刷着刷着突然卡死转圈，过两分钟又恢复，隔三岔五掉线，打游戏延迟瞬间飙到 999ms！
+        </div>
+
+        <div class="rescue-steps">
+          <div class="rescue-step-item">
+            <strong>1. 开启自动负载均衡 (Auto)</strong>
+            <p>在节点选择列表中，把节点分组切换为 <b>【Auto / URL Test / 自动选择】</b>，软件会自动帮你切到当前最顺畅的节点。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>2. 避开热门拥堵节点</strong>
+            <p>晚高峰（20:00 - 23:00）大家都挤在“香港 01”节点！手动切到相对小众的“日本 03”或“新加坡 02”，体验瞬间翻倍。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>3. 开启手机后台保活</strong>
+            <p>华为鸿蒙、小米 MIUI 或 OPPO 手机容易在后台把软件杀死！去系统【电池 - 应用启动管理】把软件改为“手动管理允许后台”。</p>
+          </div>
+        </div>
+
+        <div class="dog-rescue-tip">
+          🐕 <b>旺仔偷懒秘籍：</b>晚高峰大家都挤在同一条独木桥上，你换个无人小道瞬间飞起！另外把手机后台电池优化关掉，听歌才不会断连！
+        </div>
+      </article>
+
+      <!-- 抢救 4：关软件后断网死锁 -->
+      <article id="help-card-4" class="help-card">
+        <div class="help-card-header">
+          <h2>🔒 症状 4：关闭代理软件后，电脑连国内百度、微信都断网了 (死锁)</h2>
+          <span class="emergency-badge">🚨 紧急度：★★★★★</span>
+        </div>
+        <div class="symptom-desc">
+          <b>😫 痛苦现场：</b>退出 Clash 或小火箭后，电脑直接“断网死锁”，连国内的百度、微信、QQ 统统打不开了！
+        </div>
+
+        <div class="rescue-steps">
+          <div class="rescue-step-item">
+            <strong>1. 重启软件并正常退出</strong>
+            <p>重新打开 Clash 软件，勾选【系统代理】，然后再通过桌面右下角托盘图标，<b>右键点击【退出】</b>（软件会自动帮你恢复网络配置）。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>2. 手动关闭 Windows 代理</strong>
+            <p>打开 Windows【设置 - 网络和 Internet - 代理】，把<b>【使用代理服务器】</b>开关手动切换为<b>【关闭】</b>。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>3. 重置系统网络 Socket</strong>
+            <p>若依然不行，按 `Win+X` 选终端管理员，运行 `netsh winsock reset`，然后重启电脑即可彻底起死回生！</p>
+          </div>
+        </div>
+
+        <div class="dog-rescue-tip">
+          🚨 <b>旺仔保命原理：</b>这是因为软件之前非正常死亡（如强行关机），没来得及把 Windows 系统代理复位！手动把代理开关关掉立刻恢复！
+        </div>
+      </article>
+
+      <!-- 抢救 5：订阅更新失败 -->
+      <article id="help-card-5" class="help-card">
+        <div class="help-card-header">
+          <h2>🛑 症状 5：订阅更新失败，报错 HTTP 404 / 500 或 Net Error</h2>
+          <span class="emergency-badge">🚨 紧急度：★★★☆☆</span>
+        </div>
+        <div class="symptom-desc">
+          <b>😫 痛苦现场：</b>点击更新订阅，弹出一堆红色英文报错代码（如 `SSL Handshake Failed` 或 `HTTP 404`），节点无法拉取。
+        </div>
+
+        <div class="rescue-steps">
+          <div class="rescue-step-item">
+            <strong>1. 校准电脑/手机系统时间</strong>
+            <p>检查系统时间是否精准！若电脑系统时间比真实时间慢了 1 分钟，就会因为 SSL 加密证书过期校验失败而报错。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>2. 关闭杀毒软件网络拦截</strong>
+            <p>暂时关闭 360、腾讯电脑管家或杀毒软件的网络实时防护，防止它们拦截订阅链接的拉取。</p>
+          </div>
+          <div class="rescue-step-item">
+            <strong>3. 重新复制短链接/备用链接</strong>
+            <p>登录机场后台，重新点击【复制 Clash 订阅】，或者尝试使用后台提供的“聚合订阅链接”。</p>
+          </div>
+        </div>
+
+        <div class="dog-rescue-tip">
+          💡 <b>旺仔提醒：</b>电脑时间如果相差 1 分钟，加密证书就会觉得你在“穿越”，立马把你拒之门外！打开系统自动时间校准即可解开！
+        </div>
+      </article>
+
+      <!-- 极速自测 Checklist -->
+      <section class="checklist-section">
+        <h2>🐕 旺仔 60 秒极速自测清单（勾选查看通畅度）</h2>
+        <p>遇到网络卡住，按照下方 4 个检查项打勾自测：</p>
+        <div class="checklist-grid">
+          <label class="checklist-item">
+            <input type="checkbox">
+            <span>1. 我已检查手机/电脑本地 WiFi 是正常的（切 4G 热点测试过）</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox">
+            <span>2. 我的代理软件模式设置的是【Rule / 配置 / 绕过大陆】而不是【Direct】</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox">
+            <span>3. 我已尝试在软件主界面下拉更新了一次最新订阅</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox">
+            <span>4. 我选的是绿色的低延迟节点，且手机后台未把软件杀死</span>
+          </label>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-bottom">
+      <span>© 2026 旺仔旺旺旺 · 掉线排查 ICU 抢救指南</span>
+      <a href="goodies.html">旺仔推荐</a>
+      <a href="toolbox.html">百宝狗窝</a>
+      <a href="policy.html">编辑与推广政策</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button>
+
+  <script>
+    // Symptom tab jump switcher
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.symptom-btn');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.dataset.target;
+          tabs.forEach(t => t.classList.toggle('active', t === tab));
+
+          const targetCard = document.getElementById(targetId);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

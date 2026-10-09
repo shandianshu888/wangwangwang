@@ -1,1 +1,588 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>百宝狗窝｜客户端与工具教程｜新年旺旺旺</title><meta name="description" content="旺仔整理小火箭、Clash Party、Windows、iOS、macOS 客户端下载与配置教程。"><link rel="stylesheet" href="assets/styles.css"><script defer src="assets/app.js"></script></head><body><a class="skip-link" href="#main">跳到正文</a><header class="site-header"><a class="brand" href="index.html"><span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span><span>新年旺旺旺</span></a><button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button><nav id="site-nav" class="site-nav" aria-label="主导航"><a href="index.html">首页</a><a class="nav-branded" href="goodies.html">旺仔推荐</a><a class="nav-branded" aria-current="page" href="toolbox.html">百宝狗窝</a><a class="nav-branded" href="help.html">急救锦囊</a><a class="nav-branded" href="pitfall.html">排雷哨所</a><a class="nav-branded" href="fun.html">快乐源泉</a><a href="articles.html">文章</a><a href="about.html">关于旺仔</a><a href="policy.html">编辑政策</a></nav></header><main id="main"><section class="page-hero"><div class="wrap"><p class="eyebrow">百宝狗窝 · 客户端与工具</p><h1>工具先认准，配置再开搞。</h1><p>下载入口、导入订阅、系统代理和设备兼容性，旺仔把常用步骤放在一个独立窝里。</p></div></section><section class="wrap topic-hubs" style="padding-block:54px"><a href="articles/client-download-and-setup-guide.html"><strong>小火箭与 Clash Party 详细教程</strong><span>Windows、iOS、macOS 下载、导入与排障</span></a><a href="articles/shadowrocket-download-official.html"><strong>Shadowrocket 官方下载</strong><span>核对 App Store ID，避开仿冒安装包</span></a><a href="articles/clash-party-download-safe.html"><strong>Clash Party 官方 Releases</strong><span>系统架构、版本与来源检查</span></a><a href="articles/windows-clash-client-choice.html"><strong>Windows 客户端选择</strong><span>维护状态、日志和 TUN 能力</span></a></section></main><footer class="site-footer"><div class="wrap footer-bottom"><span>© 2026 旺仔旺旺旺</span><a href="policy.html">编辑政策</a></div></footer><button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026翻墙梯子福利排雷｜百宝狗窝 客户端下载与傻瓜教程｜梯子旺旺旺</title>
+  <meta name="description" content="手把手教小白下载与配置小火箭 Shadowrocket、Clash Verge、v2rayNG、Clash Party，全平台从正版下载到一键导入的傻瓜图文教程。">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/app.js"></script>
+  <style>
+    .toolbox-hero {
+      background: var(--pink-soft);
+      border-bottom: var(--border);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .toolbox-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 12px 0;
+      font-weight: 950;
+    }
+    .toolbox-hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #3d3733;
+    }
+
+    /* 平台选择器选项卡 */
+    .platform-tabs-wrapper {
+      background: #fff;
+      border-bottom: var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 72px;
+      z-index: 20;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .platform-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .platform-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 950;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .platform-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
+      background: var(--yellow);
+    }
+    .platform-btn.active {
+      background: var(--pink);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .platform-btn em {
+      font-style: normal;
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+    }
+
+    /* 教程主面板 */
+    .toolbox-container {
+      padding: 40px 0 80px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding-inline: clamp(20px, 3.5vw, 60px);
+      margin: 0;
+      margin: 0 auto;
+    }
+
+    .platform-panel {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .platform-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      background: #fff8e8;
+      border: var(--border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      box-shadow: 5px 5px 0 var(--ink);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-header p {
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+      color: #5d554f;
+    }
+
+    /* 傻瓜教程步骤条 */
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    @media (max-width: 850px) {
+      .step-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step-card {
+      background: #fff;
+      border: var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 5px 5px 0 var(--ink);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .step-card:hover {
+      box-shadow: 7px 7px 0 var(--ink);
+      transform: translateY(-2px);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 12px;
+      background: var(--ink);
+      color: var(--yellow);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 950;
+      margin-bottom: 12px;
+      width: max-content;
+      box-shadow: 2px 2px 0 var(--pink);
+    }
+    .step-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      font-weight: 950;
+    }
+    .step-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #38332f;
+      margin: 0 0 14px;
+    }
+
+    /* 搞怪避坑高亮块 */
+    .dog-tip-box {
+      margin-top: auto;
+      padding: 12px 14px;
+      background: #fff0a8;
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 850;
+      color: #3a322c;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+    }
+    .dog-tip-box.warning {
+      background: #ffd8e2;
+    }
+
+    /* 下载按钮组 */
+    .download-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--yellow);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 950;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .download-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3.5px 3.5px 0 var(--ink);
+      background: var(--pink);
+    }
+
+    /* FAQ 问答面板 */
+    .toolbox-faq {
+      margin-top: 50px;
+      background: #fff8e8;
+      border: var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .toolbox-faq h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .faq-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .faq-item {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .faq-item summary {
+      font-weight: 950;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-item p {
+      margin: 10px 0 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #4a433e;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span>
+      <span class="brand-fun-logo">
+        <span class="fun-char char-ti">梯</span>
+        <span class="fun-char char-zi">子</span>
+        <span class="fun-char char-w1">旺</span>
+        <span class="fun-char char-w2">旺</span>
+        <span class="fun-char char-w3">旺</span>
+        <span class="fun-badge">⚡2026福利排雷</span>
+      </span>
+    </a>
+    <button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button>
+    <nav id="site-nav" class="site-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <div class="nav-dropdown">
+        <a class="nav-branded" href="goodies.html">旺仔推荐 ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="value.html">⚖️ 旺仔性价比</a>
+          <a href="compare.html">📊 旺仔对比</a>
+        </div>
+      </div>
+      <a class="nav-branded" aria-current="page" href="toolbox.html">百宝狗窝</a>
+      <a class="nav-branded" href="help.html">急救锦囊</a>
+      <a class="nav-branded" href="pitfall.html">排雷哨所</a>
+      <a class="nav-branded" href="fun.html">快乐源泉</a>
+      <a href="articles.html">文章</a>
+      <a href="about.html">关于旺仔</a>
+      <a href="articles/shadowrocket-download-official.html">apple免费账号</a>
+      <a href="policy.html">编辑政策</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero 区域 -->
+    <section class="toolbox-hero">
+      <div class="wrap">
+        <p class="eyebrow">🧰 2026 翻墙梯子福利排雷 · 百宝狗窝</p>
+        <h1>🐕 2026 翻墙梯子福利排雷 ⚡ 客户端下载与傻瓜教程！</h1>
+        <p>手把手教小白玩转<b>苹果 iOS 小火箭、Windows 电脑、安卓手机与 Mac</b>！从避坑安全正版下载，到复制粘贴一键导入订阅，旺仔伸出狗爪带你一步搞定！</p>
+      </div>
+    </section>
+
+    <!-- 平台切换 Selector -->
+    <div class="platform-tabs-wrapper">
+      <div class="wrap">
+        <div class="platform-tabs" role="tablist" aria-label="客户端平台选择">
+          <button class="platform-btn active" data-platform="ios" role="tab" aria-selected="true">
+            🍏 苹果 iOS (小火箭) <em>最推荐</em>
+          </button>
+          <button class="platform-btn" data-platform="win" role="tab" aria-selected="false">
+            💻 Windows 电脑 (Clash Verge) <em>电脑党</em>
+          </button>
+          <button class="platform-btn" data-platform="android" role="tab" aria-selected="false">
+            🤖 安卓手机 (v2rayNG / Clash) <em>安卓党</em>
+          </button>
+          <button class="platform-btn" data-platform="mac" role="tab" aria-selected="false">
+            🍎 macOS 苹果电脑 (Clash Party) <em>Mac玩家</em>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 教程面板容器 -->
+    <div class="toolbox-container">
+
+      <!-- 面板 1：iOS 小火箭 -->
+      <div id="panel-ios" class="platform-panel active" role="tabpanel">
+        <div class="panel-header">
+          <div>
+            <h2>🍏 苹果 iOS：Shadowrocket（小火箭）傻瓜教程</h2>
+            <p>苹果手机最省心、最稳定的上网神器！只要用外区美区 Apple ID 即可下载。</p>
+          </div>
+          <div class="download-btn-group">
+            <a href="articles/shadowrocket-download-official.html" class="download-btn">📖 查看官方下载防骗教程 ↗</a>
+          </div>
+        </div>
+
+        <div class="step-grid">
+          <article class="step-card">
+            <span class="step-badge">步骤 1：去哪儿安全下载？</span>
+            <h3>1. 登录美区/外区 Apple ID 下载</h3>
+            <p>国区 App Store 搜索不到小火箭！切记：<b>千万不要在系统【设置-iCloud】里登录别人的账号！</b>只需要打开 App Store，点击右上角头像，拉到最底部退出登录，然后登录借来的或买的美区账号，搜索 <b>Shadowrocket</b> ($2.99) 下载。</p>
+            <div class="dog-tip-box warning">
+              🚨 <b>旺仔保命警示：</b>如果在系统设置里登录陌生 iCloud，手机可能被远控锁定变成“砖头狗”！切记只在 App Store 商店内登录！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 2：怎么导入订阅？</span>
+            <h3>2. 把机场订阅一键倒进小火箭</h3>
+            <p>在机场后台找到“一键导入小火箭”按钮点击，或者复制<b>“Clash / Shadowrocket 订阅链接”</b>。打开小火箭，点击右上角<b>【+】号</b>，类型选择 <b>Subscribe (订阅)</b>，把复制好的链接粘贴在 URL 框里，点击右上角【保存】。</p>
+            <div class="dog-tip-box">
+              💡 <b>狗子偷懒秘籍：</b>导入后在主界面往下拉刷新一下，节点列表就会啪的一下全弹出来啦！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 3：怎么开启连线？</span>
+            <h3>3. 选个顺眼的节点，开启大开关</h3>
+            <p>在小火箭节点列表里，点击<b>【延迟测试】</b>，找个延迟几十毫秒的绿色节点点一下。然后把最顶上的<b>【未连接】大开关往右一划</b>！首次开启会弹出“允许添加 VPN 配置”，按提示输入手机解锁密码即可。</p>
+            <div class="dog-tip-box">
+              🐕 <b>旺仔碎碎念：</b>弹出 iOS 授权提示别吓一跳，那是苹果系统的防抓包护城河，输入密码给小火箭通关文牒就行！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 4：搞怪技巧与分流</span>
+            <h3>4. 全局路由设为【配置】，省流量！</h3>
+            <p>在小火箭首页下方，把<b>【全局路由】</b>设置为<b>【配置】(Config)</b>。这样刷淘宝、看 B 站走国内直连不耗机场流量；看 YouTube、X 走国外代理！</p>
+            <div class="dog-tip-box">
+              🎉 <b>大功告成：</b>现在打开 Safari 浏览器输入 youtube.com 试试，快乐冲浪吧！
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 面板 2：Windows 电脑 -->
+      <div id="panel-win" class="platform-panel" role="tabpanel">
+        <div class="panel-header">
+          <div>
+            <h2>💻 Windows 电脑：Clash Verge Rev / Party 教程</h2>
+            <p>电脑端最强大的科学上网神器！支持新协议，开机即连，打游戏看4K都不卡。</p>
+          </div>
+          <div class="download-btn-group">
+            <a href="articles/windows-clash-client-choice.html" class="download-btn">📖 查看 Windows 客户端选型 ↗</a>
+          </div>
+        </div>
+
+        <div class="step-grid">
+          <article class="step-card">
+            <span class="step-badge">步骤 1：去哪儿安全下载？</span>
+            <h3>1. 从 Github Releases 官方下载</h3>
+            <p>推荐下载开源的 <b>Clash Verge Rev</b> 或 <b>Clash Party</b>。认准 Github 官方 Releases 页面，下载 `.exe` 或 `.msi` 安装包。一路点【下一步】安装到电脑。</p>
+            <div class="dog-tip-box warning">
+              🚨 <b>防坑提醒：</b>别在百度随便下带有广告的“修改版”，小心暗藏后台挖矿木马！认准开源社区原版。
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 2：怎么导入订阅？</span>
+            <h3>2. 复制订阅链接，一键导入</h3>
+            <p>打开机场后台，点击<b>【复制 Clash 订阅链接】</b>。打开 Clash Verge 客户端，点击左侧<b>【订阅】(Profiles)</b> 菜单，把链接粘贴到上方地址栏，点击<b>【导入】(Import)</b> 按钮。</p>
+            <div class="dog-tip-box">
+              💡 <b>小技巧：</b>导入成功后，右键点击订阅卡片选择“定时更新”，设置成 24 小时更新，节点永不上线失效！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 3：怎么开启代理？</span>
+            <h3>3. 选择节点，勾选【系统代理】</h3>
+            <p>点击左侧<b>【代理】(Proxies)</b> 菜单，选择“规则”模式，找个低延迟节点点一下。然后点击左侧<b>【设置】</b>，开启<b>【系统代理】(System Proxy)</b> 开关，按钮变绿就说明成功啦！</p>
+            <div class="dog-tip-box">
+              🎮 <b>打游戏进阶（TUN 模式）：</b>如果要玩 Steam / 绝地求生等网游，把<b>【TUN 模式】</b>勾上，相当于内置网游加速器！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 4：退出与排障</span>
+            <h3>4. 关电脑前记得退出系统代理</h3>
+            <p>不想上网时，直接右键点击任务栏右下角的软件小图标，选择<b>【退出】</b>（它会自动帮你把 Windows 系统代理关掉，避免下次开机没开软件导致网页打不开）。</p>
+            <div class="dog-tip-box">
+              🐶 <b>旺仔救急：</b>如果电脑网页突然打不开，检查一下 Windows 设置-网络-代理，看看是不是被死锁了！
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 面板 3：Android 安卓 -->
+      <div id="panel-android" class="platform-panel" role="tabpanel">
+        <div class="panel-header">
+          <div>
+            <h2>🤖 安卓手机：v2rayNG / Clash Meta 教程</h2>
+            <p>开源免费，无广告！支持华为、小米、OPPO、vivo 等全系安卓手机。</p>
+          </div>
+        </div>
+
+        <div class="step-grid">
+          <article class="step-card">
+            <span class="step-badge">步骤 1：下载安装包</span>
+            <h3>1. 下载 v2rayNG 或 Clash Meta APK</h3>
+            <p>在官网或者 GitHub Releases 下载 `.apk` 安装包。安装时如果手机提示“来自未知来源”，点击【允许安装】即可。</p>
+            <div class="dog-tip-box">
+              💡 <b>推荐选哪个：</b>新手小白推荐 <b>v2rayNG</b>（界面极其简单）；喜欢分流高级玩家推荐 <b>Clash Meta</b>。
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 2：导入订阅</span>
+            <h3>2. 复制订阅，一键批量导入</h3>
+            <p>以 v2rayNG 为例：在机场后台复制 v2ray 订阅链接。打开 v2rayNG，点击左上角<b>【三条杠菜单 - 订阅设置】</b>，点击右上角【+】号，粘贴链接保存。然后返回主界面，点击右上角【三点 - 批量更新订阅】。</p>
+            <div class="dog-tip-box">
+              🐕 <b>旺仔汪汪：</b>更新完之后，刷的一下节点名字就全出来啦！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 3：启动连线</span>
+            <h3>3. 测试延迟，点击右下角 V 字按钮</h3>
+            <p>点击右上角【测试全部节点延迟】，挑个绿色低延迟的节点点一下。然后点击右下角<b>【圆圈 V 字形连接按钮】</b>，允许系统建立 VPN 连接。</p>
+            <div class="dog-tip-box">
+              🎉 <b>成功标示：</b>通知栏出现小钥匙或 VPN 标志，说明已经通畅啦！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 4：华为鸿蒙特别避坑</span>
+            <h3>4. 鸿蒙 / 小米后台保活设置</h3>
+            <p>华为鸿蒙或小米 MIUI 手机容易在后台把软件“杀掉”。记得在手机【设置-电池-应用启动管理】里，把 v2rayNG 改为“手动管理”，勾选【允许后台活动】！</p>
+            <div class="dog-tip-box warning">
+              🚨 <b>防后台挂掉：</b>设好后台保活，锁屏听 YouTube 音乐才不会突然断掉！
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 面板 4：macOS 苹果电脑 -->
+      <div id="panel-mac" class="platform-panel" role="tabpanel">
+        <div class="panel-header">
+          <div>
+            <h2>🍎 macOS 苹果电脑：Clash Verge / Party 教程</h2>
+            <p>适配 Apple Silicon (M1/M2/M3) 及 Intel 芯片，原生流畅无缝对接。</p>
+          </div>
+          <div class="download-btn-group">
+            <a href="articles/clash-party-download-safe.html" class="download-btn">📖 查看 macOS 安装说明 ↗</a>
+          </div>
+        </div>
+
+        <div class="step-grid">
+          <article class="step-card">
+            <span class="step-badge">步骤 1：下载 dmg 安装</span>
+            <h3>1. 下载对应芯片的 .dmg 包</h3>
+            <p>根据 Mac 芯片选择：M1/M2/M3 选 <b>aarch64 / arm64</b> 版本；Intel 选 <b>x64</b> 版本。下载后双击 `.dmg`，把图标拖进 Applications 文件夹。</p>
+            <div class="dog-tip-box warning">
+              🚨 <b>Mac 提示已损坏？</b>如果提示“无法打开，因为无法确认开发者”，去系统偏好设置 - 隐私与安全性 - 点击【仍要打开】！
+            </div>
+          </article>
+
+          <article class="step-card">
+            <span class="step-badge">步骤 2：导入与配置</span>
+            <h3>2. 粘贴订阅链接并启动代理</h3>
+            <p>复制机场 Clash 订阅链接，在 Clash 软件 Profiles 页面导入。然后在菜单栏顶部勾选<b>【Set as System Proxy】（设为系统代理）</b>。</p>
+            <div class="dog-tip-box">
+              💡 <b>极简开关：</b>在 Mac 顶部状态栏小猫咪图标上右键，可以直接切节点和设代理！
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 常见疑问 Q&A -->
+      <section class="toolbox-faq">
+        <h2>🐕 狗窝避坑 Q&A（小白常见破坑答疑）</h2>
+        <div class="faq-grid">
+          <details class="faq-item">
+            <summary>❓ 为什么小火箭/Clash 连接后提示“允许添加 VPN 配置”？</summary>
+            <p>别慌！那是 iOS 和安卓系统的安全护城河协议。任何代理软件首次启动时，系统都会弹出提醒。点击“允许”并输入手机锁屏密码，给软件发放通关钥匙即可。</p>
+          </details>
+          <details class="faq-item">
+            <summary>❓ 导入订阅链接时报错 "Net Error" 或 "更新失败" 怎么办？</summary>
+            <p>大概率是因为你当前手机没开任何网络节点，或者机场订阅入口域名临时波动。尝试：1. 切换成 4G/5G 移动网络重试；2. 检查订阅链接有没有少复制字母；3. 到机场后台换备用订阅链接。</p>
+          </details>
+          <details class="faq-item">
+            <summary>❓ 为什么开启代理后，国内淘宝、B站、微信变慢了？</summary>
+            <p>因为你的软件开启了“全局代理”模式，导致访问国内网站也绕道国外服务器了！请在软件设置中把【全局路由 / 模式】修改为<b>【Rule / 配置 / 绕过大陆】</b>，国内流量直连，国外流量代理，省流又极速！</p>
+          </details>
+          <details class="faq-item">
+            <summary>❓ 电脑开机后突然所有网页都打不开，显示“无网络”？</summary>
+            <p>这是因为你之前强行关闭了电脑，导致 Windows 系统的代理开关没自动关掉。解决方法：打开 Windows【设置 - 网络和 Internet - 代理】，把“使用代理服务器”开关手动关掉，或者重新打开 Clash 客户端即可恢复！</p>
+          </details>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-bottom">
+      <span>© 2026 旺仔旺旺旺 · 傻瓜教程手把手教你避坑</span>
+      <a href="goodies.html">旺仔推荐</a>
+      <a href="value.html">旺仔性价比</a>
+      <a href="policy.html">编辑与推广政策</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button>
+
+  <script>
+    // Tab switcher script for platforms
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.platform-btn');
+      const panels = document.querySelectorAll('.platform-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetPlatform = tab.dataset.platform;
+
+          tabs.forEach(t => {
+            t.classList.toggle('active', t === tab);
+            t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+          });
+
+          panels.forEach(panel => {
+            if (panel.id === `panel-${targetPlatform}`) {
+              panel.classList.add('active');
+            } else {
+              panel.classList.remove('active');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

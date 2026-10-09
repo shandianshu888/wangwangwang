@@ -1,1 +1,560 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>排雷哨所｜机场与网络工具选择避坑｜新年旺旺旺</title><meta name="description" content="从来源、套餐、隐私、节点和推广披露角度识别网络工具与机场选择中的常见坑。"><link rel="stylesheet" href="assets/styles.css"><script defer src="assets/app.js"></script></head><body><a class="skip-link" href="#main">跳到正文</a><header class="site-header"><a class="brand" href="index.html"><span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span><span>新年旺旺旺</span></a><button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button><nav id="site-nav" class="site-nav" aria-label="主导航"><a href="index.html">首页</a><a class="nav-branded" href="goodies.html">旺仔推荐</a><a class="nav-branded" href="toolbox.html">百宝狗窝</a><a class="nav-branded" href="help.html">急救锦囊</a><a class="nav-branded" aria-current="page" href="pitfall.html">排雷哨所</a><a class="nav-branded" href="fun.html">快乐源泉</a><a href="articles.html">文章</a><a href="about.html">关于旺仔</a><a href="policy.html">编辑政策</a></nav></header><main id="main"><section class="page-hero"><div class="wrap"><p class="eyebrow">排雷哨所 · 证据优先</p><h1>广告说得旺，证据跟上了吗？</h1><p>把价格、流量、隐私和稳定性分开看，不把一次成功连接写成永久保证。</p></div></section><section class="wrap topic-hubs" style="padding-block:54px"><a href="articles/cheap-airport-how-to-choose.html"><strong>便宜机场怎么选</strong><span>套餐限制、证据和退出成本</span></a><a href="articles/free-airport-safe.html"><strong>免费机场安全吗</strong><span>订阅泄露、权限与隐私风险</span></a><a href="articles/shadowrocket-vs-clash-party.html"><strong>小火箭和 Clash Party 怎么选</strong><span>先看设备，不看谁更强</span></a><a href="articles/clash-party-download-safe.html"><strong>下载页安全吗</strong><span>官方来源、版本和校验清单</span></a></section></main><footer class="site-footer"><div class="wrap footer-bottom"><span>© 2026 旺仔旺旺旺</span><a href="policy.html">编辑政策</a></div></footer><button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026翻墙梯子福利排雷｜排雷哨所 机场防跑路预警宝典｜梯子旺旺旺</title>
+  <meta name="description" content="机场突然跑路删库怎么办？旺仔排雷哨所带你盘清机场跑路前 7 大征兆、5 大防跑路金律以及不幸被跑路后的 4 步紧急止损方案。">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/app.js"></script>
+  <style>
+    .pitfall-hero {
+      background: var(--pink-soft);
+      border-bottom: var(--border);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .pitfall-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 12px 0;
+      font-weight: 950;
+    }
+    .pitfall-hero p {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #3d3733;
+    }
+
+    /* 哨所导航 Selector */
+    .pitfall-tabs-wrapper {
+      background: #fff;
+      border-bottom: var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 72px;
+      z-index: 20;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .pitfall-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .pitfall-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 950;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .pitfall-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
+      background: var(--yellow);
+    }
+    .pitfall-btn.active {
+      background: var(--pink);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .pitfall-container {
+      padding: 40px 0 80px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding-inline: clamp(20px, 3.5vw, 60px);
+      margin: 0;
+      margin: 0 auto;
+    }
+
+    /* 模块卡片布局 */
+    .section-title-box {
+      background: #fff8e8;
+      border: var(--border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+    .section-title-box h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-box p {
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+      color: #554e48;
+    }
+
+    /* 网格列表 */
+    .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 850px) {
+      .rule-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rule-card {
+      background: #fff;
+      border: var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 5px 5px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+    }
+    .rule-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 7px 7px 0 var(--ink);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .rule-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      background: var(--yellow);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 950;
+      color: var(--ink);
+      margin-bottom: 12px;
+      width: max-content;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .rule-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      font-weight: 950;
+    }
+    .rule-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #38332f;
+      margin: 0 0 12px;
+    }
+
+    .dog-warning-box {
+      margin-top: auto;
+      padding: 12px 14px;
+      background: #ffe3e9;
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 850;
+      color: #8c1e38;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+    }
+
+    /* 跑路前兆 7 大信号 grid */
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 950px) {
+      .signal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      .signal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .signal-card {
+      background: #fffdf5;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 4px 4px 0 var(--ink);
+      position: relative;
+    }
+    .signal-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .signal-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #524a45;
+    }
+
+    /* 跑路历史案例档案 */
+    .history-cases-box {
+      background: #fff8e8;
+      border: var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 6px 6px 0 var(--ink);
+      margin-top: 50px;
+    }
+    .history-cases-box h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 950;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (max-width: 800px) {
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .case-item {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .case-item b {
+      display: block;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .case-item p {
+      margin: 4px 0;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #554e48;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-dog" aria-hidden="true">ᴖᴥᴖ</span>
+      <span class="brand-fun-logo">
+        <span class="fun-char char-ti">梯</span>
+        <span class="fun-char char-zi">子</span>
+        <span class="fun-char char-w1">旺</span>
+        <span class="fun-char char-w2">旺</span>
+        <span class="fun-char char-w3">旺</span>
+        <span class="fun-badge">⚡2026福利排雷</span>
+      </span>
+    </a>
+    <button class="menu-button" aria-expanded="false" aria-controls="site-nav">菜单 ☰</button>
+    <nav id="site-nav" class="site-nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <div class="nav-dropdown">
+        <a class="nav-branded" href="goodies.html">旺仔推荐 ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="value.html">⚖️ 旺仔性价比</a>
+          <a href="compare.html">📊 旺仔对比</a>
+        </div>
+      </div>
+      <a class="nav-branded" href="toolbox.html">百宝狗窝</a>
+      <a class="nav-branded" href="help.html">急救锦囊</a>
+      <a class="nav-branded" aria-current="page" href="pitfall.html">排雷哨所</a>
+      <a class="nav-branded" href="fun.html">快乐源泉</a>
+      <a href="articles.html">文章</a>
+      <a href="about.html">关于旺仔</a>
+      <a href="articles/shadowrocket-download-official.html">apple免费账号</a>
+      <a href="policy.html">编辑政策</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero 区域 -->
+    <section class="pitfall-hero">
+      <div class="wrap">
+        <p class="eyebrow">🚨 2026 翻墙梯子福利排雷 · 排雷哨所</p>
+        <h1>💣 2026 翻墙梯子福利排雷 ⚡ 机场防跑路与避坑宝典！🐕</h1>
+        <p>买了一年大套餐，第二天站长带小姨子跑路了？社群解散、官网502、节点死光？<b>别慌！看门犬旺仔带你识别 7 大跑路前兆、5 大防收割金律以及不幸被跑路后的 4 步止损方案！</b></p>
+      </div>
+    </section>
+
+    <!-- 阵地切换 Selector -->
+    <div class="pitfall-tabs-wrapper">
+      <div class="wrap">
+        <div class="pitfall-tabs">
+          <button class="pitfall-btn active" data-target="section-prevent">
+            🛡️ 怎么提前预防跑路？ (5大避坑金律)
+          </button>
+          <button class="pitfall-btn" data-target="section-signals">
+            🚨 跑路前有什么征兆？ (7大诡异信号)
+          </button>
+          <button class="pitfall-btn" data-target="section-action">
+            💸 不幸被跑路了怎么办？ (4步紧急止损)
+          </button>
+          <button class="pitfall-btn" data-target="section-history">
+            📜 已跑路机场档案库 (10个真实案例)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pitfall-container">
+
+      <!-- 阵地 1：怎么提前预防跑路 (5 大金律) -->
+      <section id="section-prevent" style="scroll-margin-top:150px">
+        <div class="section-title-box">
+          <h2>🛡️ 旺仔防跑路 5 大保命金律（怎么预防被收割？）</h2>
+          <p>把主动权握在自己手里！学会这 5 招，就算站长跑去月球，你也丝毫不慌。</p>
+        </div>
+
+        <div class="rule-grid">
+          <article class="rule-card">
+            <span class="rule-tag">金律 1：周期法则</span>
+            <h3>1. 先月后年，切忌冲动长付！</h3>
+            <p>即使年付折算下来便宜得像白送，也<b>强烈建议先小额月付 1~3 个月</b>！机场行业变数极多，月付才是王道。你省下的那点折扣，远不够买一张“被跑路后的后悔药”。</p>
+            <div class="dog-warning-box">
+              🐕 <b>旺仔提醒：</b>一次性冲 3 年包的大冤种，跑路时连狗都会替你心疼钱包！
+            </div>
+          </article>
+
+          <article class="rule-card">
+            <span class="rule-tag">金律 2：警惕诱惑</span>
+            <h3>2. 警惕“吐血大甩卖”与“买一送一”</h3>
+            <p>平时百来块的套餐突然发公告打 2 折，甚至买一年送一年？别以为捡到了宝！这往往是机场资金链断裂、准备在跑路前<b>疯狂卷走最后一波资金</b>的吸血信号！</p>
+            <div class="dog-warning-box">
+              🚨 <b>反常必有妖：</b>降价越狠，跑路越快！突然天降巨额优惠券时千万别续费！
+            </div>
+          </article>
+
+          <article class="rule-card">
+            <span class="rule-tag">金律 3：双活备份</span>
+            <h3>3. 必须配置“第二备用号”（防灾后备箱）</h3>
+            <p><b>永远不要依赖单一机场！</b>手头必须搭配一个按量计费、不过期的备用包（如大佬云、Flybit）。主线路抽风或关站时，秒切备用号，办公追剧不耽误。</p>
+            <div class="dog-warning-box">
+              💡 <b>狗子保命秘籍：</b>备用包花几块钱能放一年，是防范突然断网最踏实的护身符。
+            </div>
+          </article>
+
+          <article class="rule-card">
+            <span class="rule-tag">金律 4：格式标准</span>
+            <h3>4. 认准标准订阅，拒绝私有专属软件！</h3>
+            <p>坚决不用只提供私有 `.exe` 软件的小作坊机场！一旦跑路，你连里面的节点信息都导不出来，软件还可能暗藏木马。必须认准支持 Clash / Shadowrocket 标准订阅的服务。</p>
+            <div class="dog-warning-box">
+              🛡️ <b>格式安全：</b>标准订阅让你随时随地自由更换客户端，不被小软件绑架！
+            </div>
+          </article>
+
+          <article class="rule-card" style="grid-column: 1 / -1;">
+            <span class="rule-tag">金律 5：社群信息</span>
+            <h3>5. 随时备份官方电报群 (TG) 与镜像域名</h3>
+            <p>注册后第一时间把官方 Telegram 交流群和通告频道存进书签！主官网一旦遭到攻击或打不开，Telegram 官方群是唯一能拿到最新镜像站和恢复通知的地方。</p>
+            <div class="dog-warning-box">
+              🎉 <b>旺仔总结：</b>保持清醒，小额多频，备份在手，天下我有！
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 阵地 2：跑路前 7 大诡异信号 -->
+      <section id="section-signals" style="scroll-margin-top:150px">
+        <div class="section-title-box">
+          <h2>🚨 机场跑路前兆 7 大诡异信号（嗅到立刻停止续费！）</h2>
+          <p>狗狗嗅觉最灵敏！当出现以下两个以上信号时，说明站长已经在收拾行李了！</p>
+        </div>
+
+        <div class="signal-grid">
+          <div class="signal-card">
+            <strong>⚡️ 信号 1：TG 群突然开启全员禁言！</strong>
+            <p>管理员全员化身“哑巴狗”，禁止群友发言讨论。这 99% 是为了防止受害者在群里维权和扩散坏消息。</p>
+          </div>
+          <div class="signal-card">
+            <strong>⚡️ 信号 2：例行升级超过 48h 无进度！</strong>
+            <p>公告声称“上游服务器维护升级”，但过了两三天依然全线超时且没有任何进度更新——升级是假，打包是真！</p>
+          </div>
+          <div class="signal-card">
+            <strong>⚡️ 信号 3：客服工单只读不回或关闭！</strong>
+            <p>发工单无人理会，或者工单系统直接被删掉。人工客服消失，只剩自动机器人发敷衍废话。</p>
+          </div>
+          <div class="signal-card">
+            <strong>⚡️ 信号 4：官网域名跳转或 502 报错！</strong>
+            <p>官网突然变成“域名出售页”或者出现不可逆的 502 Bad Gateway，说明面板服务器已经欠费停止运行。</p>
+          </div>
+          <div class="signal-card">
+            <strong>⚡️ 信号 5：节点连环倒下，24h 无修复！</strong>
+            <p>列表里的节点像多米诺骨牌一样一个接一个死掉，且官方没有任何补充备用节点的恢复动作。</p>
+          </div>
+          <div class="signal-card">
+            <strong>⚡️ 信号 6：疯狂推送充值返现活动！</strong>
+            <p>突然频繁通过邮件推送“充 100 送 100”、“终身 VIP 限时抢购”，这是资金链断裂前最后的吸血狂欢。</p>
+          </div>
+          <div class="signal-card" style="grid-column: 1 / -1;">
+            <strong>⚡️ 信号 7：退款入口被默默删除，服务条款被偷偷修改！</strong>
+            <p>官方悄悄清空原本的退款承诺，修改免责条款。此时应立即保存历史证据并准备止损！</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 阵地 3：不幸被跑路了怎么办 -->
+      <section id="section-action" style="scroll-margin-top:150px">
+        <div class="section-title-box">
+          <h2>💸 不幸被跑路了怎么办？（旺仔 4 步紧急止损指南）</h2>
+          <p>钱被卷走了别郁闷砸键盘！按这 4 步冷静处理，把损失与风险降到最低。</p>
+        </div>
+
+        <div class="rule-grid">
+          <article class="rule-card">
+            <span class="rule-tag">止损 1：安全第一</span>
+            <h3>1. 立即删除软件内的失效订阅！</h3>
+            <p>第一时间在小火箭或 Clash 中<b>把已跑路机场的订阅链接删掉</b>！防止跑路机场的域名过期后被黑客抢注，通过恶意配置劫持你的流量或进行抓包。</p>
+            <div class="dog-warning-box">
+              🚨 <b>隐私安全：</b>旧订阅留在软件里可能有安全隐患，果断删掉清理干净！
+            </div>
+          </article>
+
+          <article class="rule-card">
+            <span class="rule-tag">止损 2：支付申诉</span>
+            <h3>2. 检查支付凭证并尝试平台举报</h3>
+            <p>如果是近期通过支付宝 / 微信第三方代收商付款的，保留订单号和付款凭证，在支付账单页面<b>点击【对订单有疑问 - 投诉商户】</b>，举报其未提供服务。</p>
+            <div class="dog-warning-box">
+              💡 <b>信用卡党：</b>如果是外币信用卡付款，可以向银行申请 Visa / Mastercard 的争议拒付 (Chargeback)。
+            </div>
+          </article>
+
+          <article class="rule-card">
+            <span class="rule-tag">止损 3：起死回生</span>
+            <h3>3. 启用按量备用包，30 秒复活</h3>
+            <p>拿出之前备好的按量不限时备用包（比如大佬云、Flybit），导入客户端，瞬间恢复上网！不耽误工作和追剧，情绪不被垃圾站长影响。</p>
+            <div class="dog-warning-box">
+              🐕 <b>旺仔安慰：</b>旧的不去新的不来，用备用号续上快乐，重新挑选靠谱守门员！
+            </div>
+          </article>
+
+          <article class="rule-card">
+            <span class="rule-tag">止损 4：预警避坑</span>
+            <h3>4. 去排雷社区提交记录，防止他人踩坑</h3>
+            <p>去旺仔排雷哨所或 Telegram 社区提交跑路域名和证据，帮广大小白避坑。让无良站长在圈内彻底臭名昭著！</p>
+            <div class="dog-warning-box">
+              🎉 <b>旺仔扫雷大队：</b>你的每一次曝光，都是在帮下一个小白省下血汗钱！
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 阵地 4：跑路历史案例档案库 -->
+      <section id="section-history" class="history-cases-box" style="scroll-margin-top:150px">
+        <h2>📜 跑路观察档案库（10 个经典跑路案例图谱）</h2>
+        <p>狗子整理了历史上已确认失联、断连或删库跑路的真实典型案例，供大家复盘排查：</p>
+        
+        <div class="case-grid">
+          <div class="case-item">
+            <b>01 · 速鹰 666 <small style="font-weight:normal;opacity:0.75">(2023 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>老牌中转机场，2023年突然大面积节点离线，面板无法访问，TG频道清空失联。</p>
+            <p><b>🐕 狗啃教训：</b>老牌不等于永续！切忌一次性买断过长周期。</p>
+          </div>
+          <div class="case-item">
+            <b>02 · 速云梯 <small style="font-weight:normal;opacity:0.75">(2023 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>低价促销吸引大量用户后无预警断网，面板直接重定向至域名出售广告页。</p>
+            <p><b>🐕 狗啃教训：</b>突然力度过大的年付优惠往往是资金链断裂跑路的前兆！</p>
+          </div>
+          <div class="case-item">
+            <b>03 · 猫云 CatCloud <small style="font-weight:normal;opacity:0.75">(2023 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>主打极客路线，发布“例行维护”公告后解散电报群并删库失联。</p>
+            <p><b>🐕 狗啃教训：</b>“临时维护”超过 48 小时无进度更新需高度警惕！</p>
+          </div>
+          <div class="case-item">
+            <b>04 · 布丁云 <small style="font-weight:normal;opacity:0.75">(2022 年底已知跑路)</small></b>
+            <p><b>跑路事实：</b>节点陆续失效，客服工单无人回复，随后官方域名彻底无法解析。</p>
+            <p><b>🐕 狗啃教训：</b>工单只读不回超过 3 天是严重避险信号！</p>
+          </div>
+          <div class="case-item">
+            <b>05 · 速云 66 <small style="font-weight:normal;opacity:0.75">(2023 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>平价机场代表之一，节点全红，网页出现 502 错误且无退款说明。</p>
+            <p><b>🐕 狗啃教训：</b>节点大面积连环超时且官网 5xx 时应立即暂停续费！</p>
+          </div>
+          <div class="case-item">
+            <b>06 · 极客云 <small style="font-weight:normal;opacity:0.75">(2023 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>运营多年的低价机场，TG 群开启全员禁言后彻底注销散伙。</p>
+            <p><b>🐕 狗啃教训：</b>官方社群突然开启全员禁言往往是关站跑路前兆！</p>
+          </div>
+          <div class="case-item">
+            <b>07 · Blinkload (闪连) <small style="font-weight:normal;opacity:0.75">(2022 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>曾号称高端中转机场，因团队纠纷及资金链断裂暂停服务，域名随后失效。</p>
+            <p><b>🐕 狗啃教训：</b>高价高端不代表零风险，不宜一次性投入过多！</p>
+          </div>
+          <div class="case-item">
+            <b>08 · 云翼网络 <small style="font-weight:normal;opacity:0.75">(2023 年初已知跑路)</small></b>
+            <p><b>跑路事实：</b>官网跳转至空白页，订阅链接返回 404，未发布任何退款告知。</p>
+            <p><b>🐕 狗啃教训：</b>订阅返回 404 且官网重定向异常应第一时间清理订阅！</p>
+          </div>
+          <div class="case-item">
+            <b>09 · 速风 VPN <small style="font-weight:normal;opacity:0.75">(2022 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>主打私有专属客户端一键连接，突然停止更新，跑路后用户连配置都拿不到。</p>
+            <p><b>🐕 狗啃教训：</b>依赖专属私有客户端的服务跑路后连节点配置都无法导出！</p>
+          </div>
+          <div class="case-item">
+            <b>10 · 极光加速 <small style="font-weight:normal;opacity:0.75">(2023 年已知跑路)</small></b>
+            <p><b>跑路事实：</b>以“节点升级”为名停服两周，随后官网及所有通信渠道全面失联。</p>
+            <p><b>🐕 狗啃教训：</b>以“长周期升级”为名的无进度停服多为缓冲借口！</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-bottom">
+      <span>© 2026 旺仔旺旺旺 · 机场防跑路排雷哨所</span>
+      <a href="goodies.html">旺仔推荐</a>
+      <a href="toolbox.html">百宝狗窝</a>
+      <a href="help.html">急救锦囊</a>
+      <a href="policy.html">编辑政策</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button>
+
+  <script>
+    // Tab switcher script for pitfall sections
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.pitfall-btn');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.dataset.target;
+          tabs.forEach(t => t.classList.toggle('active', t === tab));
+
+          const targetSec = document.getElementById(targetId);
+          if (targetSec) {
+            targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
