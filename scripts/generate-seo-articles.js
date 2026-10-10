@@ -173,20 +173,36 @@ const sitemapLinks=articles.map(a=>`<li><a href="articles/${a[0]}.html">${esc(a[
   fs.writeFileSync(p,text,'utf8');
 }
 
-const xml=articles.map(a=>`  <url><loc>{{SITE_URL}}/articles/${a[0]}.html</loc><lastmod>${created}</lastmod></url>`).join('\n');
+// Scan articles directory to ensure ALL html files in articles/ are included in sitemap
+const allArticleFiles = fs.readdirSync(outDir).filter(f => f.endsWith('.html'));
+const articleSlugs = Array.from(new Set([
+  ...articles.map(a => a[0]),
+  ...allArticleFiles.map(f => f.replace(/\.html$/, ''))
+]));
+
+const xml = articleSlugs.map(slug => `  <url><loc>{{SITE_URL}}/articles/${slug}.html</loc><lastmod>${created}</lastmod></url>`).join('\n');
 {
-  const p=path.join(root,'sitemap.xml.template'); let text=fs.readFileSync(p,'utf8');
-  const start='<!-- SEO-ARTICLES:START -->', end='<!-- SEO-ARTICLES:END -->';
-  const block=`${start}\n${xml}\n${end}\n`;
-  text=text.replace(new RegExp(`\\s*${start}[\\s\\S]*?${end}\\s*`),'\n');
-  text=text.replace('</urlset>',`${block}</urlset>`);
-  fs.writeFileSync(p,text,'utf8');
+  const p = path.join(root, 'sitemap.xml.template');
+  let text = fs.readFileSync(p, 'utf8');
+  const start = '<!-- SEO-ARTICLES:START -->', end = '<!-- SEO-ARTICLES:END -->';
+  const block = `${start}\n${xml}\n${end}\n`;
+  text = text.replace(new RegExp(`\\s*${start}[\\s\\S]*?${end}\\s*`), '\n');
+  text = text.replace('</urlset>', `${block}</urlset>`);
+  fs.writeFileSync(p, text, 'utf8');
+
+  // Output production sitemap.xml with site URL replaced
+  const sitemapXml = text.replace(/\{\{SITE_URL\}\}/g, 'https://tiziwww.com');
+  fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemapXml, 'utf8');
 }
 
-const rssItems=articles.map(a=>`    <item><title>${esc(a[1])}</title><link>{{SITE_URL}}/articles/${a[0]}.html</link><guid>{{SITE_URL}}/articles/${a[0]}.html</guid><pubDate>Wed, 07 Oct 2026 08:00:00 +0800</pubDate><description>${esc(a[2])}</description></item>`).join('\n');
-fs.writeFileSync(path.join(root,'rss.xml.template'),`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>梯子旺旺旺｜网络工具与排障文章</title><link>{{SITE_URL}}/</link><description>小火箭、Clash Party、Mihomo、DNS、节点选择与网络故障排查。</description><language>zh-cn</language><lastBuildDate>Wed, 07 Oct 2026 08:00:00 +0800</lastBuildDate>\n${rssItems}\n</channel></rss>\n`,'utf8');
+const rssItems = articles.map(a => `    <item><title>${esc(a[1])}</title><link>{{SITE_URL}}/articles/${a[0]}.html</link><guid>{{SITE_URL}}/articles/${a[0]}.html</guid><pubDate>Wed, 07 Oct 2026 08:00:00 +0800</pubDate><description>${esc(a[2])}</description></item>`).join('\n');
+const rssTemplateContent = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>梯子旺旺旺｜网络工具与排障文章</title><link>{{SITE_URL}}/</link><description>小火箭、Clash Party、Mihomo、DNS、节点选择与网络故障排查。</description><language>zh-cn</language><lastBuildDate>Wed, 07 Oct 2026 08:00:00 +0800</lastBuildDate>\n${rssItems}\n</channel></rss>\n`;
 
-const indexNowUrls=['','articles.html',...articles.map(a=>`articles/${a[0]}.html`)];
-fs.writeFileSync(path.join(root,'indexnow-payload.template.json'),JSON.stringify({host:'{{SITE_HOST}}',key:'{{INDEXNOW_KEY}}',keyLocation:'{{SITE_URL}}/{{INDEXNOW_KEY}}.txt',urlList:indexNowUrls.map(u=>`{{SITE_URL}}/${u}`)},null,2)+'\n','utf8');
+fs.writeFileSync(path.join(root, 'rss.xml.template'), rssTemplateContent, 'utf8');
+fs.writeFileSync(path.join(root, 'rss.xml'), rssTemplateContent.replace(/\{\{SITE_URL\}\}/g, 'https://tiziwww.com'), 'utf8');
 
-console.log(`Generated ${articles.length} article pages and updated indexes.`);
+const indexNowUrls = ['', 'articles.html', ...articleSlugs.map(slug => `articles/${slug}.html`)];
+fs.writeFileSync(path.join(root, 'indexnow-payload.template.json'), JSON.stringify({ host: '{{SITE_HOST}}', key: '{{INDEXNOW_KEY}}', keyLocation: '{{SITE_URL}}/{{INDEXNOW_KEY}}.txt', urlList: indexNowUrls.map(u => `{{SITE_URL}}/${u}`) }, null, 2) + '\n', 'utf8');
+
+console.log(`Generated ${articles.length} article pages, total ${articleSlugs.length} sitemap URLs, and updated sitemap.xml.`);
+

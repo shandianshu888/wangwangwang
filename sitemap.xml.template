@@ -11,6 +11,12 @@
   <url><loc>{{SITE_URL}}/policy.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/privacy.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/sitemap.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/help.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/pitfall.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/toolbox.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/value.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/compare.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/fun.html</loc><lastmod>2026-10-07</lastmod></url>
 <!-- SEO-ARTICLES:START -->
   <url><loc>{{SITE_URL}}/articles/shadowrocket-what-is-it.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/shadowrocket-download-official.html</loc><lastmod>2026-10-07</lastmod></url>
@@ -40,7 +46,6 @@
   <url><loc>{{SITE_URL}}/articles/mihomo-what-is.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/clash-vs-mihomo.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/windows-clash-client-choice.html</loc><lastmod>2026-10-07</lastmod></url>
-  <url><loc>{{SITE_URL}}/articles/client-download-and-setup-guide.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/shadowrocket-vs-clash-party.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/free-vpn-vs-free-airport.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/clash-party-203-upgrade-test.html</loc><lastmod>2026-10-07</lastmod></url>
@@ -73,5 +78,26 @@
   <url><loc>{{SITE_URL}}/articles/ikev2-vpn-connection-failed.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/vpn-local-network-unreachable.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>{{SITE_URL}}/articles/vpn-battery-drain-overheating.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/2026-jichang-tuijian-paihangbang.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/2026-youzhi-jichang-paihangbang.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/client-download-and-setup-guide.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/gaosu-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/haoyong-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-anti-runaway-checklist-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-bgp-iplc-difference-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-chatgpt-ai-unlocking-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-game-acceleration-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-mobile-ios-android-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-paihangbang-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-payg-traffic-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-streaming-4k-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-tiantibang-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-tuijian-2026-guide.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/jichang-vless-hysteria2-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/kaopu-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/laopai-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/pianyi-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/wending-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>{{SITE_URL}}/articles/zhuanxian-jichang-tuijian-2026.html</loc><lastmod>2026-10-07</lastmod></url>
 <!-- SEO-ARTICLES:END -->
 </urlset>
