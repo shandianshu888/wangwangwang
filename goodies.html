@@ -7,9 +7,156 @@
   <meta name="description" content="按站长提供顺序整理 16 个机场入口，从看门犬旺仔视角说明适合人群、旺仔绝活、狗啃理由与套餐价格。页面含推广披露，不代表实测排名。">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
-  <link rel="stylesheet" href="assets/goodies.css">
+  <link rel="stylesheet" href="assets/styles.css?v=20261015c">
+  <link rel="stylesheet" href="assets/goodies.css?v=20261015c">
   <script defer src="assets/app.js"></script>
+  <style>
+    /* 16 Airports Switch Sidebar (Figure 2 Style - Self-contained) */
+    .airport-switch-sidebar {
+      background: #fff !important;
+      border: 2px solid var(--ink, #171514) !important;
+      border-radius: 20px !important;
+      padding: 20px !important;
+      box-shadow: 5px 5px 0 var(--ink, #171514) !important;
+      position: sticky;
+      top: 90px;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 300px;
+      max-width: 300px;
+    }
+    .airport-switch-title {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      padding-bottom: 12px !important;
+      margin-bottom: 14px !important;
+      border-bottom: 2px dashed #ddd !important;
+      white-space: nowrap !important;
+    }
+    .airport-switch-title span {
+      font-size: 1rem !important;
+      font-weight: 950 !important;
+      color: var(--ink, #171514) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+    }
+    .airport-switch-title small {
+      font-size: 0.76rem !important;
+      color: #777 !important;
+      font-weight: 800 !important;
+      background: #f4efe6 !important;
+      padding: 2px 7px !important;
+      border-radius: 999px !important;
+      border: 1px solid #ddd !important;
+    }
+    .airport-switch-list {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+      max-height: calc(100vh - 280px) !important;
+      overflow-y: auto !important;
+      padding-right: 6px !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: var(--pink, #ff6f91) #faf6ee !important;
+    }
+    .airport-switch-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .airport-switch-list::-webkit-scrollbar-track {
+      background: #faf6ee;
+      border-radius: 999px;
+    }
+    .airport-switch-list::-webkit-scrollbar-thumb {
+      background: var(--pink, #ff6f91);
+      border-radius: 999px;
+    }
+    .airport-switch-item {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      padding: 8px 12px !important;
+      border-radius: 10px !important;
+      text-decoration: none !important;
+      font-size: 0.88rem !important;
+      font-weight: 850 !important;
+      border: 1.5px solid transparent !important;
+      background: #faf7f2 !important;
+      color: var(--ink, #171514) !important;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease !important;
+    }
+    .airport-switch-item:hover, .airport-switch-item:focus-visible {
+      background: var(--yellow, #ffd84d) !important;
+      border-color: var(--ink, #171514) !important;
+      box-shadow: 2px 2px 0 var(--ink, #171514) !important;
+      transform: translateX(3px) !important;
+      color: var(--ink, #171514) !important;
+    }
+    .airport-switch-item.current {
+      background: var(--pink, #ff6f91) !important;
+      color: #fff !important;
+      border-color: var(--ink, #171514) !important;
+      box-shadow: 3px 3px 0 var(--ink, #171514) !important;
+      font-weight: 950 !important;
+    }
+    .airport-switch-item.current b {
+      color: var(--yellow, #ffd84d) !important;
+      background: rgba(0, 0, 0, 0.25) !important;
+      padding: 1px 4px !important;
+      border-radius: 4px !important;
+    }
+    .airport-switch-item b {
+      font-family: monospace !important;
+      font-size: 0.82rem !important;
+      color: #666 !important;
+      min-width: 20px !important;
+    }
+    .airport-switch-item span {
+      flex: 1 !important;
+      white-space: nowrap !important;
+      font-weight: 900 !important;
+      color: inherit !important;
+    }
+    .airport-switch-item em {
+      font-style: normal !important;
+      font-size: 0.72rem !important;
+      background: #fff !important;
+      color: var(--ink, #171514) !important;
+      padding: 2px 7px !important;
+      border-radius: 6px !important;
+      border: 1px solid #dcd7cc !important;
+      white-space: nowrap !important;
+      font-weight: 800 !important;
+    }
+    .airport-switch-item.current em {
+      background: var(--yellow, #ffd84d) !important;
+      color: var(--ink, #171514) !important;
+      border-color: var(--ink, #171514) !important;
+      font-weight: 950 !important;
+    }
+
+    @media (max-width: 1050px) {
+      .goodies-layout {
+        grid-template-columns: 1fr !important;
+      }
+      .airport-switch-sidebar {
+        position: static !important;
+        max-height: none !important;
+        overflow: visible !important;
+        order: 2 !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+      }
+      .airport-switch-list {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) !important;
+        max-height: 380px !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
