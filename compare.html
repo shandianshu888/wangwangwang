@@ -98,11 +98,11 @@
       margin: 0;
       margin-inline: auto;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 270px;
+      grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
       align-items: start;
     }
-    .airport-sidebar {
+    .airport-sidebar, .airport-switch-sidebar {
       position: sticky;
       top: 150px;
       max-height: calc(100vh - 170px);
@@ -111,7 +111,7 @@
       .compare-right-sidebar-layout {
         grid-template-columns: 1fr;
       }
-      .airport-sidebar {
+      .airport-sidebar, .airport-switch-sidebar {
         position: static;
         max-height: none;
         overflow: visible;
@@ -453,7 +453,7 @@
         <a class="nav-branded" href="about.html">关于旺仔 ▾</a>
         <div class="nav-dropdown-menu">
           <a href="about.html">🐕‍🦺 认识旺仔</a>
-          <a href="https://t.me/shandianshuvpn" target="_blank" rel="noopener">✈️ 旺仔TG频道</a>
+          <a href="https://t.me/shandianjiaoliu" target="_blank" rel="noopener">✈️ 旺仔TG群</a>
         </div>
       </div>
       <a href="articles/shadowrocket-download-official.html">apple免费账号</a>
@@ -1315,30 +1315,33 @@
         </div>
 
         <!-- 右侧粘性侧边栏 (Airport Navigation Sidebar on RIGHT) -->
-        <aside class="airport-sidebar" aria-label="16 个机场对比直达目录">
-          <div class="airport-sidebar-title">
-            <span>旺仔对比导航</span>
-            <strong>16 个机场直达目录</strong>
-            <small>按推荐顺序划分首推与次推</small>
+        <aside class="airport-switch-sidebar" aria-label="16 个机场对比直达目录">
+          <div class="airport-switch-title">
+            <span>⚡ 16个机场对比直达</span>
+            <small style="color:#777;">点击直达锚点</small>
           </div>
-          <nav class="airport-sidebar-nav">
-            <a href="#airport-01"><b>01</b><span>闪电鼠</span><em>首推</em></a>
-            <a href="#airport-02"><b>02</b><span>大佬云</span><em>次推</em></a>
-            <a href="#airport-03"><b>03</b><span>神行加速</span><em>三推</em></a>
-            <a href="#airport-04"><b>04</b><span>云界线</span><em>四推</em></a>
-            <a href="#airport-05"><b>05</b><span>榴莲云</span><em>五推</em></a>
-            <a href="#airport-06"><b>06</b><span>环球梯</span><em>六推</em></a>
-            <a href="#airport-07"><b>07</b><span>极连云</span><em>七推</em></a>
-            <a href="#airport-08"><b>08</b><span>光年梯</span><em>八推</em></a>
-            <a href="#airport-09"><b>09</b><span>边缘节点</span><em>九推</em></a>
-            <a href="#airport-10"><b>10</b><span>速界</span><em>十推</em></a>
-            <a href="#airport-11"><b>11</b><span>可信云</span><em>十一推</em></a>
-            <a href="#airport-12"><b>12</b><span>快狸</span><em>十二推</em></a>
-            <a href="#airport-13"><b>13</b><span>瞬云</span><em>十三推</em></a>
-            <a href="#airport-14"><b>14</b><span>云图</span><em>十四推</em></a>
-            <a href="#airport-15"><b>15</b><span>鲲鹏加速</span><em>十五推</em></a>
-            <a href="#airport-16"><b>16</b><span>Flybit</span><em>十六推</em></a>
-          </nav>
+          <div class="airport-switch-list">
+            <a href="#airport-01" class="airport-switch-item"><b>01</b> <span>闪电鼠</span> <em>基线首选</em></a>
+            <a href="#airport-02" class="airport-switch-item"><b>02</b> <span>大佬云</span> <em>大流量</em></a>
+            <a href="#airport-03" class="airport-switch-item"><b>03</b> <span>神行加速</span> <em>全兼容</em></a>
+            <a href="#airport-04" class="airport-switch-item"><b>04</b> <span>云界线</span> <em>抗拥堵</em></a>
+            <a href="#airport-05" class="airport-switch-item"><b>05</b> <span>榴莲云</span> <em>多机房</em></a>
+            <a href="#airport-06" class="airport-switch-item"><b>06</b> <span>环球梯</span> <em>出差首选</em></a>
+            <a href="#airport-07" class="airport-switch-item"><b>07</b> <span>极连云</span> <em>极速吞吐</em></a>
+            <a href="#airport-08" class="airport-switch-item"><b>08</b> <span>光年梯</span> <em>抗抖动</em></a>
+            <a href="#airport-09" class="airport-switch-item"><b>09</b> <span>边缘节点</span> <em>新协议</em></a>
+            <a href="#airport-10" class="airport-switch-item"><b>10</b> <span>速界</span> <em>低门槛</em></a>
+            <a href="#airport-11" class="airport-switch-item"><b>11</b> <span>可信云</span> <em>规范防护</em></a>
+            <a href="#airport-12" class="airport-switch-item"><b>12</b> <span>快狸</span> <em>极简易用</em></a>
+            <a href="#airport-13" class="airport-switch-item"><b>13</b> <span>瞬云</span> <em>救急随取</em></a>
+            <a href="#airport-14" class="airport-switch-item"><b>14</b> <span>云图</span> <em>负载均衡</em></a>
+            <a href="#airport-15" class="airport-switch-item"><b>15</b> <span>鲲鹏加速</span> <em>多设备</em></a>
+            <a href="#airport-16" class="airport-switch-item"><b>16</b> <span>Flybit</span> <em>宝藏备用</em></a>
+          </div>
+          <div style="margin-top:16px;padding-top:12px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:8px;">
+            <a href="goodies.html" style="font-size:0.82rem;font-weight:900;color:var(--pink);text-decoration:none;display:block;">← 返回 16 个机场福利大厅</a>
+            <a href="value.html" style="font-size:0.82rem;font-weight:900;color:var(--ink);text-decoration:none;display:block;">⚖️ 前往 旺仔性价比精选</a>
+          </div>
         </aside>
 
       </div>
@@ -1348,7 +1351,7 @@
   <footer class="site-footer">
     <div class="wrap footer-bottom">
       <span>© 2026 旺仔旺旺旺 · 狗子帮你排雷，复杂问题讲人话</span>
-      <a href="https://t.me/shandianshuvpn" target="_blank" rel="noopener" style="color:#64b5f6;font-weight:900;">✈️ TG频道: t.me/shandianshuvpn</a>
+      <a href="https://t.me/shandianjiaoliu" target="_blank" rel="noopener" style="color:#64b5f6;font-weight:900;">✈️ TG群: t.me/shandianjiaoliu</a>
       <a href="goodies.html">旺仔推荐</a>
       <a href="policy.html">编辑与推广政策</a>
     </div>

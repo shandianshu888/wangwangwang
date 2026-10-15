@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 2. Navigation Dropdown Builder for "旺仔推荐"
-  const navBase = location.pathname.includes('/articles/') ? '../' : './';
+  const normalizedPath = (location.pathname || '').replace(/\\/g, '/').toLowerCase();
+  const isSubDir = normalizedPath.includes('/articles/') || normalizedPath.includes('/airports/');
+  const navBase = isSubDir ? '../' : './';
   
   const navMap = {
     '旺仔好物': 'goodies.html',
@@ -278,7 +280,7 @@ function initRoamingDogBuddy() {
       <div class="dog-knowledge">
         <strong id="dog-tip-title">💡 旺仔小贴士</strong>
         <span id="dog-tip-text">点击我或等我踱步，为你送上本站冲浪知识点！</span>
-        <a id="dog-tip-link" href="goodies.html" style="font-size:0.76rem;font-weight:950;color:var(--pink);text-decoration:underline">去旺仔推荐 ↗</a>
+        <a id="dog-tip-link" href="${navBase}goodies.html" style="font-size:0.76rem;font-weight:950;color:var(--pink);text-decoration:underline">去旺仔推荐 ↗</a>
       </div>
     </div>
     <button type="button" class="dog-buddy-button" aria-label="抚摸旺仔宠物">
@@ -324,8 +326,6 @@ function initRoamingDogBuddy() {
   const linkEl = buddy.querySelector('#dog-tip-link');
   const countEl = buddy.querySelector('#pet-count');
   const btn = buddy.querySelector('.dog-buddy-button');
-
-  const navBase = location.pathname.includes('/articles/') ? '../' : './';
 
   let pettedCount = parseInt(localStorage.getItem('wang_pet_count') || '0', 10);
   countEl.textContent = pettedCount;
@@ -477,23 +477,23 @@ function initTgDogCompanion() {
 
   const widget = document.createElement('a');
   widget.className = 'tg-dog-widget';
-  widget.href = 'https://t.me/shandianshuvpn';
+  widget.href = 'https://t.me/shandianjiaoliu';
   widget.target = '_blank';
   widget.rel = 'noopener';
-  widget.setAttribute('aria-label', '关注旺仔TG电报频道 t.me/shandianshuvpn');
+  widget.setAttribute('aria-label', '关注旺仔TG电报群 t.me/shandianjiaoliu');
 
   const quotes = [
-    '✈️ 狗子叫你进电报群领粮！',
+    '✈️ 狗子叫你进电报群交流！',
     '🚨 跑路预警 + 隐藏7折暗号！',
     '⚡️ 闪电鼠与 16 厂牌情报站！',
-    '🎁 狗爪一挥！跟旺仔飞速上车！'
+    '💬 点击进入闪电TG交流群！'
   ];
 
   widget.innerHTML = `
     <div class="tg-dog-bubble" role="tooltip">${quotes[0]}</div>
     <div class="tg-dog-body">
       <span class="tg-dog-avatar">🐕‍🦺</span>
-      <span class="tg-dog-badge">✈️ 旺仔TG频道</span>
+      <span class="tg-dog-badge">✈️ 旺仔TG群</span>
     </div>
   `;
 
