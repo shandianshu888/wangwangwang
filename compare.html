@@ -6,9 +6,9 @@
   <title>2026翻墙梯子福利排雷｜旺仔对比 16 个热门机场横向深度测评｜梯子旺旺旺</title>
   <meta name="description" content="看门犬旺仔按推荐原始顺序拆解 16 个热门机场，区分首推、次推及全系列候选，从【线路架构、使用体验、晚高峰表现、节假日灾备、购买前必查】5 大维度横向搞怪对比！讲人话帮你科学选购与排雷。">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20261015c">
-  <link rel="stylesheet" href="assets/goodies.css?v=20261015c">
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="assets/styles.css?v=20261015e">
+  <link rel="stylesheet" href="assets/goodies.css?v=20261015f">
+  <script defer src="assets/app.js?v=20261015e"></script>
   <style>
     /* Scoped styles for compare page */
     .compare-filter-section {
@@ -79,16 +79,20 @@
     }
 
     .compare-right-sidebar-layout {
-      width: 100%;
-      max-width: 100%;
+      width: var(--wrap);
+      max-width: 1200px;
       box-sizing: border-box;
-      padding-inline: clamp(20px, 3.5vw, 60px);
-      margin: 0;
       margin-inline: auto;
+      padding-inline: 0;
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 28px;
       align-items: start;
+    }
+
+    .compare-right-sidebar-layout > .goodies-grid-wrap {
+      min-width: 0;
+      width: 100%;
     }
 
     /* 16 Airports Switch Sidebar (Figure 2 Style - Self-contained) */
@@ -227,6 +231,7 @@
         max-height: none !important;
         overflow: visible !important;
         order: -1 !important;
+        grid-column: 1 !important;
         min-width: 100% !important;
         max-width: 100% !important;
       }

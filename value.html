@@ -7,17 +7,16 @@
   <meta name="description" content="从实际需求、套餐门槛、周期成本与隐藏避坑点 5 大维度横向拆解 16 个热门机场性价比。看门犬旺仔带你搞怪讲人话看懂真实性价比！">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20261015c">
-  <link rel="stylesheet" href="assets/goodies.css?v=20261015c">
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="assets/styles.css?v=20261015e">
+  <link rel="stylesheet" href="assets/goodies.css?v=20261015f">
+  <script defer src="assets/app.js?v=20261015e"></script>
   <style>
     .goodies-layout {
-      width: 100%;
-      max-width: 100%;
+      width: var(--wrap);
+      max-width: 1200px;
       box-sizing: border-box;
-      padding-inline: clamp(20px, 3.5vw, 60px);
-      margin: 0;
       margin-inline: auto;
+      padding-inline: 0;
       display: grid;
       grid-template-columns: 300px minmax(0, 1fr);
       gap: 28px;
@@ -25,7 +24,7 @@
     }
 
     /* 16 Airports Switch Sidebar (Figure 2 Style - Self-contained) */
-    .airport-switch-sidebar {
+    .goodies-layout > .airport-switch-sidebar {
       background: #fff !important;
       border: 2px solid var(--ink, #171514) !important;
       border-radius: 20px !important;
@@ -37,6 +36,7 @@
       width: 100%;
       min-width: 300px;
       max-width: 300px;
+      grid-column: 1 !important;
     }
     .airport-switch-title {
       display: flex !important;
@@ -160,6 +160,7 @@
         max-height: none !important;
         overflow: visible !important;
         order: -1 !important;
+        grid-column: 1 !important;
         min-width: 100% !important;
         max-width: 100% !important;
       }
@@ -175,6 +176,7 @@
       gap: 20px;
       min-width: 0;
       width: 100%;
+      grid-column: 2;
     }
     .goodie-card-value {
       border: var(--border);
@@ -276,6 +278,7 @@
       }
       .value-cards-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-column: 1;
       }
     }
     @media (max-width: 750px) {

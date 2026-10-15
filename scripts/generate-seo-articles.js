@@ -26,7 +26,7 @@ const sources = {
 
 const articles = [
   ['shadowrocket-what-is-it','小火箭是什么？Shadowrocket 和 VPN 有什么区别','小火箭通常指 iOS 上的 Shadowrocket。本文用讲人话的方式解释它、代理订阅和传统 VPN 的区别。','starter','小火箭 Shadowrocket VPN 区别','小火箭是一个规则型代理客户端，不是线路服务本身。它负责读取配置、转发流量和按规则分流；能否连接、速度如何，取决于配置、网络和服务端。', ['先分清“客户端”和“服务”：购买应用不等于自动获得可用线路。','系统代理、VPN 接口和应用内代理的覆盖范围不同，不能只看状态图标。','换了网络出口也不等于绝对匿名，账号、Cookie、指纹和服务日志仍可能关联身份。'], sources.shadowrocket],
-  ['shadowrocket-download-official','小火箭怎么下载？认准 Shadowrocket 官方 App Store 页面','查找 Shadowrocket 正版下载入口、开发者信息和 App Store ID，避开来路不明的安装包。','pitfall','小火箭下载 Shadowrocket 官网 正版','优先从 Apple App Store 获取 Shadowrocket，并核对 App Store ID 932747118 与页面开发者信息。不要安装陌生网站提供的描述文件、企业签名包或所谓破解版。', ['搜索结果里的“官网”不一定由开发者运营，先看最终是否跳转到官方商店。','不要向安装教程提供 Apple ID 密码、短信验证码或设备解锁密码。','已安装应用也要定期检查来源；异常证书、频繁掉签不是正常功能。'], sources.shadowrocket],
+  ['shadowrocket-download-official','免费 Apple ID 共享池 🐕 外区账号实时监控','实时监控的美区、日区、港区免费 Apple ID 共享池。专供 App Store 下载 Shadowrocket 小火箭正版应用，包含绝对安全红线与避坑指南。','pitfall','apple免费账号 免费Apple ID 美区Apple ID 小火箭下载','实时监控的外区 Apple ID 共享池，提供美区、日区、港区免费账号支持下载正版 Shadowrocket。绝对不要在系统设置 iCloud 中登录！', ['严禁在 iPhone 设置或 iCloud 内登录共享账号，仅在 App Store 中登录。','不要向安装教程提供个人手机号或升级双重认证，弹窗选其他选项-不升级。','下载完成后请及时退出账号，方便其他用户使用。'], sources.shadowrocket],
   ['shadowrocket-import-no-connection','小火箭导入订阅后不能用：按这 7 步排查','Shadowrocket 导入订阅成功却无法连接时，从订阅、节点、权限、DNS 和日志逐层定位。','help','小火箭不能用 导入订阅 无法连接','先不要反复删除重装。确认订阅已更新、选中了具体节点、连接权限已允许，再用日志判断卡在解析、连接还是握手阶段。', ['切换网络测试，区分本地 Wi-Fi 问题与配置问题。','只测试一个节点不能代表整份订阅，应在同一时间检查多个不同入口。','求助时提供脱敏后的时间、错误文本、客户端版本和网络类型，不要公开订阅链接。'], sources.shadowrocket],
   ['shadowrocket-rule-global-direct','小火箭规则模式、全局代理和直连怎么选','解释 Shadowrocket 的规则、全局与直连模式，给出不同使用场景下的选择方法。','starter','小火箭 规则模式 全局代理 直连','日常使用通常先选规则模式；全局用于临时验证是否为规则匹配问题；直连用于恢复原网络或做对照测试。模式名称是流量决策，不代表线路质量。', ['规则模式按域名、IP 或规则集决定去向，重点是规则是否匹配。','全局会让更多流量走所选代理，可能增加延迟和流量消耗。','直连不经过代理，可作为排障对照组，但不等于关闭所有网络扩展。'], sources.shadowrocket],
   ['shadowrocket-dns-settings','小火箭 DNS 怎么设置？先弄懂本地解析和远程解析','Shadowrocket DNS 设置入门：解释解析路径、泄露误区和网页打不开时的排查顺序。','help','小火箭 DNS 设置 DNS 泄露','没有明确需求时，优先使用配置提供者或官方文档建议的 DNS 方案，不要同时堆叠多个互相覆盖的设置。网页打不开时，先确认是域名解析失败还是代理连接失败。', ['DNS 只负责把域名解析为地址，不负责保证目标服务器可达。','加密 DNS 能保护部分解析过程，但不能自动提供匿名或绕过所有限制。','修改前记录原值；失败时恢复默认，再一次只改一个变量。'], sources.cloudflareDns],
@@ -138,7 +138,10 @@ function render(a,index){
 <aside class="article-side"><span class="badge ${color}">${cat}</span><p><strong>搜索词</strong><br>${esc(keyword)}</p><p>本文不提供机场名单，不展示模拟测速，不做无依据排名。</p><button class="share-copy" data-copy="${esc(title)}">复制文章标题</button><p class="copy-status" role="status" aria-live="polite"></p></aside></main><footer class="site-footer"><div class="wrap footer-bottom"><span>© 2026 旺仔旺旺旺</span><a href="../policy.html">编辑政策</a></div></footer><button class="back-top" type="button" aria-label="返回顶部">↑<span>回到狗窝</span></button></body></html>`;
 }
 
-articles.forEach((a,i)=>fs.writeFileSync(path.join(outDir, `${a[0]}.html`), render(a,i), 'utf8'));
+articles.forEach((a,i)=>{
+  if (a[0] === 'shadowrocket-download-official') return;
+  fs.writeFileSync(path.join(outDir, `${a[0]}.html`), render(a,i), 'utf8');
+});
 
 const cards = articles.map((a,i)=>{
   const [slug,title,description,category,keyword]=a;

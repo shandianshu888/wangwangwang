@@ -13,6 +13,96 @@ document.addEventListener('DOMContentLoaded', () => {
   const normalizedPath = (location.pathname || '').replace(/\\/g, '/').toLowerCase();
   const isSubDir = normalizedPath.includes('/articles/') || normalizedPath.includes('/airports/');
   const navBase = isSubDir ? '../' : './';
+
+  // Keep a single verified footer structure across root, article, and airport pages.
+  const siteFooter = document.querySelector('.site-footer');
+  if (siteFooter) {
+    siteFooter.className = 'site-footer site-footer-modern';
+    siteFooter.innerHTML = `
+      <div class="wrap footer-main">
+        <div class="footer-intro">
+          <a class="footer-title" href="${navBase}index.html">梯子旺旺旺</a>
+          <p>帮你看懂线路、价格与风险。先核实，再选择；不拿广告词当结论。</p>
+        </div>
+        <nav class="footer-column" aria-label="页脚内容导航">
+          <b>内容</b>
+          <a href="${navBase}articles.html">文章列表</a>
+          <a href="${navBase}pitfall.html">排雷专题</a>
+          <a href="${navBase}compare.html">机场对比</a>
+        </nav>
+        <nav class="footer-column" aria-label="页脚机场导航">
+          <b>机场</b>
+          <a href="${navBase}goodies.html">机场推荐</a>
+          <a href="${navBase}value.html">性价比机场</a>
+          <a href="${navBase}compare.html">横向对比</a>
+          <a href="${navBase}pitfall.html">避坑指南</a>
+        </nav>
+        <nav class="footer-column" aria-label="页脚资源导航">
+          <b>资源</b>
+          <a href="${navBase}toolbox.html">客户端下载</a>
+          <a href="${navBase}help.html">常见问题</a>
+          <a href="${navBase}articles/shadowrocket-download-official.html">Apple 免费账号</a>
+        </nav>
+        <nav class="footer-column" aria-label="页脚关于导航">
+          <b>关于与政策</b>
+          <a href="${navBase}about.html">关于本站</a>
+          <a href="${navBase}privacy.html">隐私政策</a>
+          <a href="${navBase}policy.html">编辑与推广政策</a>
+        </nav>
+      </div>
+      <div class="wrap footer-bottom">
+        <span>© 2026 梯子旺旺旺</span>
+        <span>内容讲人话，链接不藏话。</span>
+      </div>
+    `;
+  }
+
+  // Keep one canonical navigation bar on every main, article, and airport page.
+  // Only the href prefix changes for subdirectories; all existing destinations stay intact.
+  if (nav) {
+    const fileName = normalizedPath.split('/').pop() || 'index.html';
+    let activeKey = '';
+
+    if (fileName === 'index.html' || fileName === '') activeKey = 'home';
+    else if (normalizedPath.includes('/airports/') || ['goodies.html', 'value.html', 'compare.html'].includes(fileName)) activeKey = 'recommend';
+    else if (fileName === 'toolbox.html') activeKey = 'toolbox';
+    else if (fileName === 'help.html') activeKey = 'help';
+    else if (fileName === 'pitfall.html') activeKey = 'pitfall';
+    else if (fileName === 'fun.html') activeKey = 'fun';
+    else if (fileName === 'shadowrocket-download-official.html') activeKey = 'apple';
+    else if (normalizedPath.includes('/articles/') || fileName === 'articles.html') activeKey = 'articles';
+    else if (fileName === 'about.html') activeKey = 'about';
+    else if (fileName === 'policy.html') activeKey = 'policy';
+
+    nav.setAttribute('aria-label', '主导航');
+    nav.innerHTML = `
+      <a data-nav-key="home" href="${navBase}index.html">首页</a>
+      <div class="nav-dropdown">
+        <a data-nav-key="recommend" class="nav-branded nav-dropdown-toggle" href="${navBase}goodies.html">旺仔推荐 ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="${navBase}value.html">⚖️ 旺仔性价比</a>
+          <a href="${navBase}compare.html">📊 旺仔对比</a>
+        </div>
+      </div>
+      <a data-nav-key="toolbox" class="nav-branded" href="${navBase}toolbox.html">百宝狗窝</a>
+      <a data-nav-key="help" class="nav-branded" href="${navBase}help.html">急救锦囊</a>
+      <a data-nav-key="pitfall" class="nav-branded" href="${navBase}pitfall.html">排雷哨所</a>
+      <a data-nav-key="fun" class="nav-branded" href="${navBase}fun.html">快乐源泉</a>
+      <a data-nav-key="articles" href="${navBase}articles.html">文章</a>
+      <div class="nav-dropdown">
+        <a data-nav-key="about" class="nav-branded" href="${navBase}about.html">关于旺仔 ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="${navBase}about.html">🐕‍🦺 认识旺仔</a>
+          <a href="https://t.me/shandianjiaoliu" target="_blank" rel="noopener">✈️ 旺仔TG群</a>
+        </div>
+      </div>
+      <a data-nav-key="apple" href="${navBase}articles/shadowrocket-download-official.html">apple免费账号</a>
+      <a data-nav-key="policy" href="${navBase}policy.html">编辑政策</a>
+    `;
+
+    const activeLink = nav.querySelector(`[data-nav-key="${activeKey}"]`);
+    if (activeLink) activeLink.setAttribute('aria-current', 'page');
+  }
   
   const navMap = {
     '旺仔好物': 'goodies.html',
@@ -222,6 +312,9 @@ function initArticleFilterSystem() {
 // Left Gutter Knowledge Dog Implementation
 function initRoamingDogBuddy() {
   if (document.querySelector('.dog-buddy')) return;
+
+  const buddyPath = (location.pathname || '').replace(/\\/g, '/').toLowerCase();
+  const navBase = buddyPath.includes('/articles/') || buddyPath.includes('/airports/') ? '../' : './';
 
   const buddy = document.createElement('div');
   buddy.className = 'dog-buddy';
